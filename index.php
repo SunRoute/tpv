@@ -1,5 +1,7 @@
 <?php
 
-    echo("Hola Mundo")
+    echo("Hola Mundo");
 
-    ?>
+    var_dump("Hola");
+
+?>
