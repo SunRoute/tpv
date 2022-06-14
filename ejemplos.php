@@ -1,6 +1,6 @@
 <?php
 
-    // // variables
+    // variables
 
     // $color  = "rojo";
 
@@ -21,7 +21,7 @@
     // $numero *= 2;
     // $numero /= 2;
 
-    // // echo $numero;
+    // echo $numero;
 
     // // operadores de incremento y decremento
 
@@ -45,10 +45,16 @@
 
     // // operadores de lógicos
 
-    // $numero = 1;
-    // $numero2 = 2;
+    // $numero = "1";
+    // $numero2 = 1;
 
     // if ($numero == $numero2) {
+    //     echo "Son iguales";
+    // } else {
+    //     echo "No son iguales";
+    // }
+
+    // if ($numero === $numero2) {
     //     echo "Son iguales";
     // } else {
     //     echo "No son iguales";
@@ -65,6 +71,13 @@
     // } else {
     //     echo "El segundo es mayor";
     // }
+
+    // if ($numero !== $numero2) {
+    //     echo "Son iguales";
+    // } else {
+    //     echo "No son iguales";
+    // }
+
 
     // if ($numero < $numero2) {
     //     echo "El primero es menor";
@@ -104,7 +117,7 @@
 
     // $colores = ["rojo", "azul", "amarillo"];
 
-    // echo $colores[0];
+    // echo $colores[1];
 
     // // Arrays asociativos
 
@@ -128,22 +141,25 @@
 
     // // Arrays multidimensionales asociativos
 
-    // $colores = [
-    //     "rojo" => [
-    //         "nombre" => "Rojo",
-    //         "color" => "rojo"
+    // $usuarios = [
+    //     "1" => [
+    //         "nombre" => "Carlos",
+    //         "apellidos" => "Seda"
     //     ],
-    //     "azul" => [
-    //         "nombre" => "Azul",
-    //         "color" => "azul"
+    //     "2" => [
+    //         "nombre" => "Luis",
+    //         "apellidos" => "Martinez"
     //     ],
-    //     "amarillo" => [
-    //         "nombre" => "Amarillo",
-    //         "color" => "amarillo"
+    //     "3" => [
+    //         "nombre" => "Juan",
+    //         "apellidos" => "Perez"
     //     ]
     // ];
 
-    // echo $colores["rojo"]["nombre"];
+    // foreach($usuarios as $usuario) {
+    //     echo $usuario["nombre"] . " su apellido es " . $usuario["apellidos"] . "<br>";
+    // }
+
 
     // // JSON
 
@@ -157,7 +173,7 @@
 
     // echo $json;
 
-    // // JSON asociativo
+    // // JSON asociativo multidimiensional
 
     // $colores = [
     //     "rojo" => [
@@ -320,6 +336,13 @@
 
     // echo "El texto reemplazado es: ".str_replace("o", "x", $texto)."<br>";
 
+    // str_pad, sirve para rellenar un string con un string de una longitud determinada
+
+    // $number = "4";
+    // $number = str_pad($number, 3, '0', STR_PAD_LEFT); 
+
+    // echo "El numero es: ".$number."<br>";    
+
     // // COMPROBACIÓN DE VARIABLES
 
     // // isset(), sirve para saber si una variable esta definida
@@ -366,6 +389,16 @@
     //     echo "El color es: ".$color."<br>";
     // }
 
+    // // array_unshift(), sirve para añadir un elemento al principio de un array
+
+    // $colores = ["amarillo", "azul", "verde"];
+
+    // array_unshift($colores, "rojo");
+
+    // foreach($colores as $color) {
+    //     echo "El color es: ".$color."<br>";
+    // }
+
     // // array_pop(), sirve para eliminar un elemento del final de un array
 
     // $colores = ["rojo", "azul", "verde"];
@@ -386,14 +419,18 @@
     //     echo "El color es: ".$color."<br>";
     // }
 
-    // // array_unshift(), sirve para añadir un elemento al principio de un array
+    // array_keys(), sirve para obtener las claves de un array
 
-    // $colores = ["amarillo", "azul", "verde"];
+    // $colores = [
+    //     "rojo" => "Rojo",
+    //     "azul" => "Azul",
+    //     "verde" => "Verde"
+    // ];
+    
+    // $claves = array_keys($colores);
 
-    // array_unshift($colores, "rojo");
-
-    // foreach($colores as $color) {
-    //     echo "El color es: ".$color."<br>";
+    // foreach($claves as $clave) {
+    //     echo "La clave es: ".$clave."<br>";
     // }
 
     // // array_slice(), sirve para obtener una porcion de un array
@@ -418,21 +455,29 @@
 
     // // array_key_exists(), sirve para saber si una clave existe en un array
 
-    // $colores = ["rojo", "azul", "verde", "amarillo"];
-
-    // if(array_key_exists(2, $colores)) {
-    //     echo "La clave 2 existe<br>";
+    // $colores = [
+    //     "rojo" => "Rojo",
+    //     "azul" => "Azul",
+    //     "verde" => "Verde"
+    // ];
+    
+    // if(array_key_exists("rojo", $colores)) {
+    //     echo "La clave existe<br>";
     // } else {
-    //     echo "La clave 2 no existe<br>";
+    //     echo "La clave no existe<br>";
     // }
 
     // // array_search(), sirve para buscar un elemento en un array
 
-    // $colores = ["rojo", "azul", "verde", "amarillo"];
+    // $colores = [
+    //     "rojo" => "Rojo",
+    //     "azul" => "Azul",
+    //     "verde" => "Verde"
+    // ];
 
-    // $posicion = array_search("azul", $colores);
+    // $color = array_search("Rojo", $colores);
 
-    // echo "La posicion de azul es: ".$posicion."<br>";
+    // echo "El color es: ".$color."<br>";
 
     // // array_reverse(), sirve para invertir un array
 
@@ -467,6 +512,21 @@
     // foreach($colores_asignados as $usuario => $color) {
     //     echo "El usuario es " .$usuario. " y su color es: ".$color."<br>";
     // }
+
+    // explode(), sirve para separar un string en un array
+
+    // $texto = "Hola mundo";
+
+    // $array = explode(" ", $texto);
+
+    // echo "El array es: ".$array[0]."<br>";
+
+    // implode(), sirve para unir un array en un string
+
+    // $array = ["Hola", "mundo"];
+
+    // $texto = implode(" ", $array);
+
 
     // // FECHAS
 
