@@ -314,9 +314,9 @@
 
     // // strpos(), sirve para saber la posicion de un string dentro de otro string
 
-    // $texto = "Hola mundo";
+    $texto = "Hola mundo";
 
-    // echo "La posicion de la letra 'o' es: ".strpos($texto, "o")."<br>";
+    echo "La posicion de la letra 'o' es: ".strpos($texto, "o")."<br>";
 
     // // strtoupper(), sirve para convertir un string a mayusculas
 
@@ -530,7 +530,7 @@
 
     // // FECHAS
 
-    // // date(), sirve para obtener la fecha actual
+    // date(), sirve para obtener la fecha actual
 
     // echo "La fecha es: ".date("d/m/Y")."<br>";
 
