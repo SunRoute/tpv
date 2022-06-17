@@ -1,4 +1,16 @@
+<?php
+
+    require_once 'app/Controllers/ProductCategoryController.php';
+
+    use app\Controllers\ProductCategoryController;
+
+    $categoria = new ProductCategoryController();
+    $categorias = $categoria->index();
+
+?>
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -30,7 +42,12 @@
                         </div>
                     </div>
                     <div class="row mb-5">
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="productos.html"><img src="assets/img/refrescos.jpeg"></a>
+                        <?php foreach($categorias as $categoria):?>
+                            <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="productos.html"><img src="<?= $categoria['imagen_url']; ?>"></a>
+                            <h5 class="text-center mb-0"><?= $categoria['nombre']; ?></h5>
+                            </div>
+                        <?php endforeach;?>
+                        <!-- <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="productos.html"><img src="assets/img/refrescos.jpeg"></a>
                             <h5 class="text-center mb-0">Refrescos</h5>
                         </div>
                         <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="productos.html"><img src="assets/img/alcohol.jpeg"></a>
@@ -53,7 +70,7 @@
                         </div>
                         <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="productos.html"><img src="assets/img/postres.png"></a>
                             <h5 class="text-center mb-0">Postres</h5>
-                        </div>
+                        </div> -->
                     </div>
                 </section>
             </div>
