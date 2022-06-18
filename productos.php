@@ -1,3 +1,13 @@
+<?php
+
+    require_once 'app/Controllers/ProductController.php';
+
+    use app\Controllers\ProductController;
+
+    $producto = new ProductController();
+    $productos = $producto->index();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +41,13 @@
                         </div>
                     </div>
                     <div class="row mb-5">
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/variado.jpeg"></a>
+
+                        <?php foreach($productos as $producto):?>
+                             <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="<?= $producto['imagen_url']; ?>"></a>
+                                 <h5 class="text-center mb-0"><?= $producto['nombre']; ?></h5>
+                             </div>
+                        <?php endforeach;?>
+                        <!-- <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/variado.jpeg"></a>
                             <h5 class="text-center mb-0">Variado</h5>
                         </div>
                         <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/ensaladilla.jpeg"></a>
@@ -66,7 +82,7 @@
                         </div>
                         <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="assets/img/patatas-bravas.jpeg"></a>
                             <h5 class="text-center mb-0">Patatas bravas</h5>
-                        </div>
+                        </div> -->
                     </div>
                 </section>
             </div>
