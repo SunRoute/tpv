@@ -1,23 +1,23 @@
 <?php
 
-namespace app\Controllers;
+	namespace app\Controllers;
 
-require_once 'app/Models/Table.php';
+	require_once 'app/Models/Table.php';
 
-use app\Models\Table;
+	use app\Models\Table;
 
-class TableController {
+	class TableController {
 
-	protected $table;
+		protected $table;
 
-	public function __construct(){  
+		public function __construct(){  
 
-		$this->table = new Table();
+			$this->table = new Table();
+		}
+
+		public function index(){
+			return $this->table->index();
+		}
 	}
-
-	public function index(){
-		return $this->table->index();
-	}
-}
 
 ?>

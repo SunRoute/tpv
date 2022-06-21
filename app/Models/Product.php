@@ -9,9 +9,9 @@ use core\Connection;
 
 class Product extends Connection {
 
-	public function index(){
+	public function index($category){
 
-        $query = "SELECT * FROM productos WHERE categoria_id = 5";
+        $query = "SELECT * FROM productos WHERE categoria_id = $category";
 
         $stmt = $this->pdo->prepare($query);
         $result = $stmt->execute();
