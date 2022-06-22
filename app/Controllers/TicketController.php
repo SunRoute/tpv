@@ -2,7 +2,7 @@
 
 	namespace app\Controllers;
 
-	require_once 'app/Models/Tickets.php';
+	require_once 'app/Models/Ticket.php';
 
 	use app\Models\Ticket;
 
@@ -15,9 +15,14 @@
 			$this->ticket = new Ticket();
 		}
 
-		public function index(){
-			return $this->ticket->index();
+		public function index($mesa){
+			return $this->ticket->index($mesa);
 		}
+
+		public function total($mesa){
+			return $this->ticket->total($mesa);
+		}
+		
 	}
 
 ?>

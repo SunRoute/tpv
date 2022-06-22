@@ -5,20 +5,21 @@
     use app\Controllers\TicketController;
 
     $ticket = new TicketController();
-    $tickets = $ticket->index();
+    $tickets = $ticket->index($_GET['mesa']);
+    $total = $ticket->total($_GET['mesa']);
 
 ?>
 
 <div class="col-12 col-lg-5 col-xl-4 mt-5">
     <aside>
-        <h2 class="text-center">TICKET MESA<?php echo $_GET['mesa'];?></h2>
+        <h2 class="text-center">TICKET MESA</h2>
         <ul class="list-group shadow mt-4">
             <?php foreach($tickets as $ticket):?>
-                <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?= $producto['imagen_url']; ?>">
-                    <div class="flex-grow-1"><span class="categoria-prod"><?= $categoria['nombre']; ?></span>
-                        <h4 class="nombre-prod mb-0"><?= $producto['nombre']; ?></h4><span class="medida-prod">20 ml.</span>
+                <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?= $ticket['imagen']; ?>">
+                    <div class="flex-grow-1"><span class="categoria-prod"><?= $ticket['categoria']; ?></span>
+                        <h4 class="nombre-prod mb-0"><?= $ticket['producto']; ?></h4>
                     </div>
-                    <p class="precio-prod"><?= $precio['precio_base']; ?></p>
+                    <p class="precio-prod"><?= $ticket['base']; ?></p>
                 </li>
             <?php endforeach;?>
             <!-- <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="assets/img/cocacola.png">
@@ -79,15 +80,17 @@
                         </div>
                     </div>
                     <div class="row justify-content-between g-0">
+                        <?php foreach($total as $ticket):?>
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 pb-1">74.30 €</h5>
+                            <h5 class="text-center text-white mb-0 pb-1"><?= $ticket['base']; ?></h5>
                         </div>
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 border-start pb-1">21%</h5>
+                            <h5 class="text-center text-white mb-0 border-start pb-1"></h5>
                         </div>
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 bg-dark pb-1">102.45 €</h5>
+                            <h5 class="text-center text-white mb-0 bg-dark pb-1"><?= $ticket['precio_total']; ?></h5>
                         </div>
+                        <?php endforeach;?>
                     </div>
                 </div>
             </div>
