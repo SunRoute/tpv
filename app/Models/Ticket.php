@@ -30,7 +30,7 @@
 
             $query = "SELECT
             round(SUM(precios.precio_base), 2)AS base,
-            round(SUM(precios.precio_base*multiplicador), 2) AS precio_total
+            round(SUM(precios.precio_base*multiplicador), 2) AS precio_total 
             FROM tickets 
             INNER JOIN precios ON tickets.precio_id = precios.id 
             INNER JOIN productos ON precios.producto_id = productos.id 
@@ -41,7 +41,7 @@
             $stmt = $this->pdo->prepare($query);
             $result = $stmt->execute();
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
 
         }
 
