@@ -30,13 +30,16 @@
 
             $query = "SELECT
             round(SUM(precios.precio_base), 2)AS base,
-            round(SUM(precios.precio_base*multiplicador), 2) AS precio_total 
+            round(SUM(precios.precio_base*multiplicador), 2) AS precio_total,
+            iva.tipo AS iva
+            
+
             FROM tickets 
             INNER JOIN precios ON tickets.precio_id = precios.id 
             INNER JOIN productos ON precios.producto_id = productos.id 
             INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
-            INNER JOIN iva ON iva.id = precios.iva_id
-            WHERE mesa_id = $mesa AND tickets.activo = 1 AND venta_id IS NULL";
+            INNER JOIN iva ON precios.iva_id = iva.id 
+            WHERE mesa_id = $mesa AND tickets.activo = 1 AND venta_id IS NULL AND iva.activo = 1 GROUP BY iva.id";
 
             $stmt = $this->pdo->prepare($query);
             $result = $stmt->execute();

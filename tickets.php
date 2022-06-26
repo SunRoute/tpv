@@ -24,6 +24,8 @@
                         <p class="precio-prod"><?= $ticket['base']; ?></p>
                     </li>
                 <?php endforeach;?>
+            <?php else: ?>
+                <h4><?php echo "No has seleccionado ninguna mesa"?></h4> 
             <?php endif; ?>
         </ul>
         <div class="row mt-3">
@@ -41,15 +43,33 @@
                         </div>
                     </div>
                     <div class="row justify-content-between g-0">
-                        <div class="col">
-                            <h5 class="text-center text-white mb-0 pb-1"><?= $total['base']; ?></h5>
-                        </div>
-                        <div class="col">
-                                <h5 class="text-center text-white mb-0 border-start pb-1"></h5>
-                        </div>
-                        <div class="col">
-                            <h5 class="text-center text-white mb-0 bg-dark pb-1"><?= $total['precio_total']; ?></h5>
-                        </div>
+                        <?php if (isset($total)):?>
+                            <div class="col">
+                                 <h5 class="text-center text-white mb-0 pb-1"><?= $total['base']; ?>€</h5>
+                            </div>
+                        <?php else:?>
+                            <div class="col">
+                                 <h5 class="text-center text-white mb-0 pb-1">0 €</h5>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (isset($total)):?>
+                            <div class="col">
+                                <h5 class="text-center text-white mb-0 border-start pb-1"><?= $total['iva']; ?>%</h5>
+                            </div>
+                        <?php else:?>
+                            <div class="col">
+                                 <h5 class="text-center text-white mb-0 pb-1"> - </h5>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (isset($total)):?>
+                            <div class="col">
+                                <h5 class="text-center text-white mb-0 bg-dark pb-1"><?= $total['precio_total']; ?>€</h5>
+                            </div>
+                            <?php else:?>
+                            <div class="col">
+                                 <h5 class="text-center text-white mb-0 pb-1"> 0 € </h5>
+                            </div>
+                        <?php endif; ?>    
                     </div>
                 </div>
             </div>
