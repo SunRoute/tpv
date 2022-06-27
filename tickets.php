@@ -5,17 +5,25 @@
     use app\Controllers\TicketController;
 
     $ticket = new TicketController();
+
     if (isset($_GET['mesa'])){
         $tickets = $ticket->index($_GET['mesa']);
         $total = $ticket->total($_GET['mesa']);
-    };       
+        $numeros = $ticket->numero($_GET['mesa']);
+    };           
 ?>
 
 <div class="col-12 col-lg-5 col-xl-4 mt-5">
     <aside>
-        <h2 class="text-center">TICKET MESA</h2>
+        <?php if(!empty($numeros)):?>
+            <?php foreach($numeros as $numero):?>
+                <h2 class="text-center">TICKET MESA <?= $numero['numero']; ?></h2>
+            <?php endforeach;?>
+        <?php else: ?>
+            <h2 class="text-center">TICKET</h2>    
+        <?php endif; ?>
         <ul class="list-group shadow mt-4">
-            <?php if (isset($tickets)):?>
+            <?php if(!empty($tickets)):?>
                 <?php foreach($tickets as $ticket):?>
                     <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?= $ticket['imagen']; ?>">
                         <div class="flex-grow-1"><span class="categoria-prod"><?= $ticket['categoria']; ?></span>
@@ -36,14 +44,18 @@
                             <h5 class="text-center text-white mb-0 pt-1">B. Imponible</h5>
                         </div>
                         <div class="col">
-                            <h5 class="text-center text-white mb-0 border-start pt-1">IVA</h5>
+                            <?php if (!empty($total)):?>
+                                <h5 class="text-center text-white mb-0 border-start pt-1">IVA (<?= $total['iva'] ?>)</h5>
+                            <?php else:?>
+                                <h5 class="text-center text-white mb-0 border-start pt-1">IVA ()</h5>
+                            <?php endif; ?>
                         </div>
                         <div class="col">
                             <h5 class="text-center text-white mb-0 bg-dark pt-1">TOTAL</h5>
                         </div>
                     </div>
                     <div class="row justify-content-between g-0">
-                        <?php if (isset($total)):?>
+                        <?php if (!empty($total)):?>
                             <div class="col">
                                  <h5 class="text-center text-white mb-0 pb-1"><?= $total['base']; ?>€</h5>
                             </div>
@@ -52,16 +64,16 @@
                                  <h5 class="text-center text-white mb-0 pb-1">0 €</h5>
                             </div>
                         <?php endif; ?>
-                        <?php if (isset($total)):?>
+                        <?php if (!empty($total)):?>
                             <div class="col">
-                                <h5 class="text-center text-white mb-0 border-start pb-1"><?= $total['iva']; ?>%</h5>
+                                <h5 class="text-center text-white mb-0 border-start pb-1"><?= $total['total_iva']; ?>€</h5>
                             </div>
                         <?php else:?>
                             <div class="col">
                                  <h5 class="text-center text-white mb-0 pb-1"> - </h5>
                             </div>
                         <?php endif; ?>
-                        <?php if (isset($total)):?>
+                        <?php if (!empty($total)):?>
                             <div class="col">
                                 <h5 class="text-center text-white mb-0 bg-dark pb-1"><?= $total['precio_total']; ?>€</h5>
                             </div>

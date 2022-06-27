@@ -18,6 +18,9 @@
 		public function index($category){
 			return $this->product->index($category);
 		}
+		public function categoria($category){
+			return $this->product->categoria($category);
+		}
 	}	
 
 ?>
