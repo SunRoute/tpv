@@ -18,6 +18,10 @@
 		public function index(){
 			return $this->table->index();
 		}
+
+		public function numero($mesa){
+			return $this->table->numero($mesa);
+		}
 	}
 
 ?>

@@ -19,6 +19,20 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         }
+
+        public function numero($mesa){
+
+            $query = "SELECT
+            mesas.numero AS numero
+            FROM mesas
+            WHERE mesas.id = $mesa";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+
+        }
     }
 
 ?>

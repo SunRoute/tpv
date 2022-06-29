@@ -23,9 +23,7 @@
 			return $this->ticket->total($mesa);
 		}
 		
-		public function numero($mesa){
-			return $this->ticket->numero($mesa);
-		}
+		
 		
 	}
 

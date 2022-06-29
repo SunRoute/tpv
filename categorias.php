@@ -47,30 +47,7 @@
                                 <h5 class="text-center mb-0"><?= $categoria['nombre']; ?></h5>
                             </div>
                         <?php endforeach;?>
-                        <!-- <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="productos.html"><img src="assets/img/refrescos.jpeg"></a>
-                            <h5 class="text-center mb-0">Refrescos</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="productos.html"><img src="assets/img/alcohol.jpeg"></a>
-                            <h5 class="text-center mb-0">Bebidas alcohólicas</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="productos.html"><img src="assets/img/caliente.jpeg"></a>
-                            <h5 class="text-center mb-0">Bebidas calientes</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="productos.html"><img src="assets/img/aperitivos.jpeg"></a>
-                            <h5 class="text-center mb-0">Aperitivos</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="productos.html"><img src="assets/img/tapas.jpeg"></a>
-                            <h5 class="text-center mb-0">Tapas</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="productos.html"><img src="assets/img/carnes.jpeg"></a>
-                            <h5 class="text-center mb-0">Carnes</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="productos.html"><img src="assets/img/pescado.jpeg"></a>
-                            <h5 class="text-center mb-0">Pescados</h5>
-                        </div>
-                        <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="productos.html"><img src="assets/img/postres.png"></a>
-                            <h5 class="text-center mb-0">Postres</h5>
-                        </div> -->
+                      
                     </div>
                 </section>
             </div>

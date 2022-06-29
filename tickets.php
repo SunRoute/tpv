@@ -1,24 +1,25 @@
 <?php
 
     require_once 'app/Controllers/TicketController.php';
+    require_once 'app/Controllers/TableController.php';
 
     use app\Controllers\TicketController;
+    use app\Controllers\TableController;
 
     $ticket = new TicketController();
+    $mesa = new TableController();
 
     if (isset($_GET['mesa'])){
         $tickets = $ticket->index($_GET['mesa']);
         $total = $ticket->total($_GET['mesa']);
-        $numeros = $ticket->numero($_GET['mesa']);
+        $numero_mesa = $mesa->numero($_GET['mesa']);
     };           
 ?>
 
 <div class="col-12 col-lg-5 col-xl-4 mt-5">
     <aside>
-        <?php if(!empty($numeros)):?>
-            <?php foreach($numeros as $numero):?>
-                <h2 class="text-center">TICKET MESA <?= $numero['numero']; ?></h2>
-            <?php endforeach;?>
+        <?php if(!empty($numero_mesa)):?>
+            <h2 class="text-center">TICKET MESA <?= $numero_mesa['numero']; ?></h2>
         <?php else: ?>
             <h2 class="text-center">TICKET</h2>    
         <?php endif; ?>

@@ -18,8 +18,17 @@
 		public function index(){
 			return $this->venta->index();
 		}
+
         public function detalle($venta){
 			return $this->venta->detalle($venta);
+		}
+		
+		public function pedido($venta){
+			return $this->venta->pedido($venta);
+		}
+		
+		public function filtro($fecha,$mesa){
+			return $this->venta->filtro($fecha,$mesa);
 		}
     }
 ?>
