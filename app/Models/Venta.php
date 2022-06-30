@@ -60,11 +60,21 @@
 
         public function filtro($fecha,$mesa){
 
-            $query = "SELECT
-            ventas.id AS id, ventas.numero_ticket AS ticket, ventas.hora_emision AS hora, mesas.numero AS mesa, ventas.precio_total AS total
-            FROM ventas
-            INNER JOIN mesas ON ventas.mesa_id = mesas.id
-            WHERE ventas.fecha_emision ='$fecha' AND mesas.numero = $mesa";
+    
+            if($mesa == null){
+                $query = "SELECT
+                ventas.id AS id, ventas.numero_ticket AS ticket, ventas.hora_emision AS hora, mesas.numero AS mesa, ventas.precio_total AS total
+                FROM ventas
+                INNER JOIN mesas ON ventas.mesa_id = mesas.id
+                WHERE ventas.fecha_emision = '$fecha'";
+            }else{
+                $query = "SELECT
+                ventas.id AS id, ventas.numero_ticket AS ticket, ventas.hora_emision AS hora, mesas.numero AS mesa, ventas.precio_total AS total
+                FROM ventas
+                INNER JOIN mesas ON ventas.mesa_id = mesas.id
+                WHERE ventas.fecha_emision = '$fecha'
+                AND mesas.numero = $mesa";
+            }
 
             $stmt = $this->pdo->prepare($query);
             $result = $stmt->execute();

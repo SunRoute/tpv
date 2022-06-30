@@ -7,16 +7,16 @@
     $venta = new VentaController();
 
     // $ventas = $venta->index();
+    $fecha= !empty($_GET['fecha']) ? $_GET['fecha']  : date('Y-m-d');
+    $mesa = !empty($_GET['mesa']) ? $_GET['mesa']  : null;
+
+    $ventas = $venta->filtro($fecha,$mesa);
 
     if(!empty($_GET['venta'])){
         $detalles = $venta->detalle($_GET['venta']);
         $pedidos = $venta->pedido($_GET['venta']);
     }
 
-    if(!empty($_GET['fecha']) && !empty($_GET['mesa'])){
-        $ventas = $venta->filtro($_GET['fecha'], $_GET['mesa']);
-    }
-    
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +43,7 @@
             <div class="col-12 col-lg-7 col-xl-8 order-lg-1 mt-5">
                 <section>
                 
-                    <?php if( isset($_GET['venta'])): ?> 
+                    <?php if(isset($_GET['venta'])): ?> 
 
                         <h2 class="text-center">VENTA <?= $detalles['ticket']; ?></h2>
 
@@ -64,6 +64,24 @@
                             </div>
                         </div>
 
+                    <?php else: ?> 
+
+                        <h2 class="text-center">VENTA</h2>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Datos de la venta</h5>
+                                        <p class="card-text"><?php echo "No hay ningún ticket seleccionado" ?>
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    <?php endif; ?>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -74,18 +92,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($pedidos as $pedido):?>
-                                    <tr>
-                                        <td class="text-center"><img class="img-ticket" src="<?= $pedido['imagen']; ?>"></td>
-                                        <td class="text-center"><?= $pedido['producto']; ?></td>
-                                        <td class="text-center"><?= $pedido['base']; ?>€</td>
-                                        <td class="text-center"><?= $pedido['cantidad']; ?></td>
-                                    </tr>
-                                <?php endforeach;?>
+                                <?php if(isset($_GET['venta'])): ?>
+                                    <?php foreach($pedidos as $pedido):?>
+                                        <tr>
+                                            <td class="text-center"><img class="img-ticket" src="<?= $pedido['imagen']; ?>"></td>
+                                            <td class="text-center"><?= $pedido['producto']; ?></td>
+                                            <td class="text-center"><?= $pedido['base']; ?>€</td>
+                                            <td class="text-center"><?= $pedido['cantidad']; ?></td>
+                                        </tr>
+                                    <?php endforeach;?>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                         
-                    <?php endif; ?>      
+                          
                 
                 </section>
             </div>
@@ -142,7 +162,7 @@
                     <div class="list-group">
                         <?php foreach($ventas as $venta):?>
                             <?php if( isset($_GET['venta']) && $_GET['venta'] == $venta['id'] ): ?> 
-                                <a class="sale-item list-group-item list-group-item-action active" href="ventas.php?venta=<?= $venta['id']?>" aria-current="true">
+                                <a class="sale-item list-group-item list-group-item-action active" href="ventas.php?mesa=<?= $mesa ?>&fecha=<?= $fecha ?>" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1">Ticket: <?= $venta['ticket']; ?></h5>
                                         <small>Hora: <?= $venta['hora']; ?></small>
@@ -151,7 +171,7 @@
                                     <p class="mb-1"><?= $venta['total']; ?> €</p>
                                 </a>
                             <?php else: ?> 
-                                <a class="sale-item list-group-item list-group-item-action" href="ventas.php?venta=<?= $venta['id']?>" aria-current="true">
+                                <a class="sale-item list-group-item list-group-item-action" href="ventas.php?mesa=<?= $mesa ?>&fecha=<?= $fecha ?>" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1">Ticket: <?= $venta['ticket']; ?></h5>
                                         <small>Hora: <?= $venta['hora']; ?></small>
