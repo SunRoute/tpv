@@ -67,7 +67,8 @@
                 FROM ventas
                 INNER JOIN mesas ON ventas.mesa_id = mesas.id
                 WHERE ventas.fecha_emision = '$fecha'";
-            }else{
+            }
+            else{
                 $query = "SELECT
                 ventas.id AS id, ventas.numero_ticket AS ticket, ventas.hora_emision AS hora, mesas.numero AS mesa, ventas.precio_total AS total
                 FROM ventas

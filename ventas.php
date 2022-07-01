@@ -1,14 +1,16 @@
 <?php
 
     require_once 'app/Controllers/VentaController.php';
+    require_once 'app/Controllers/TableController.php';
 
     use app\Controllers\VentaController;
+    use app\Controllers\TableController;
 
     $venta = new VentaController();
+    $table = new TableController();
 
-    // $ventas = $venta->index();
     $fecha= !empty($_GET['fecha']) ? $_GET['fecha']  : date('Y-m-d');
-    $mesa = !empty($_GET['mesa']) ? $_GET['mesa']  : null;
+    $mesa = !empty($_GET['mesa']) ? $_GET['mesa'] : null;
 
     $ventas = $venta->filtro($fecha,$mesa);
 
@@ -16,7 +18,9 @@
         $detalles = $venta->detalle($_GET['venta']);
         $pedidos = $venta->pedido($_GET['venta']);
     }
-
+    
+    $mesas = $table->index();
+    
 ?>
 
 <!DOCTYPE html>
@@ -123,7 +127,7 @@
 
                             <div class="col-6">
                                 <div class="form-group">
-                                    <input type="date" name="fecha" value="" class="form-control">
+                                    <input type="date" name="fecha" value="<?php echo $fecha ?>" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -136,16 +140,12 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <select name="mesa" class="form-control">
-                                        <option value="">Todas</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
+                                            <option value="">Todas</option>
+
+                                            <?php foreach($mesas as $numero_mesa):?>
+                                                <option value="<?= $numero_mesa['numero']; ?>"
+                                                <?= $numero_mesa['numero'] == $mesa ? 'selected':'' ?>><?= $numero_mesa['numero']; ?></option>
+                                            <?php endforeach;?>
                                     </select>
                                 </div>
                             </div>
@@ -162,7 +162,7 @@
                     <div class="list-group">
                         <?php foreach($ventas as $venta):?>
                             <?php if( isset($_GET['venta']) && $_GET['venta'] == $venta['id'] ): ?> 
-                                <a class="sale-item list-group-item list-group-item-action active" href="ventas.php?mesa=<?= $mesa ?>&fecha=<?= $fecha ?>" aria-current="true">
+                                <a class="sale-item list-group-item list-group-item-action active" href="ventas.php?venta=<?= $venta['id'] ?>&fecha=<?= $fecha ?>&mesa=<?= $mesa; ?>" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1">Ticket: <?= $venta['ticket']; ?></h5>
                                         <small>Hora: <?= $venta['hora']; ?></small>
@@ -171,7 +171,7 @@
                                     <p class="mb-1"><?= $venta['total']; ?> €</p>
                                 </a>
                             <?php else: ?> 
-                                <a class="sale-item list-group-item list-group-item-action" href="ventas.php?mesa=<?= $mesa ?>&fecha=<?= $fecha ?>" aria-current="true">
+                                <a class="sale-item list-group-item list-group-item-action" href="ventas.php?venta=<?= $venta['id'] ?>&fecha=<?= $fecha ?>&mesa=<?= $mesa; ?>" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1">Ticket: <?= $venta['ticket']; ?></h5>
                                         <small>Hora: <?= $venta['hora']; ?></small>
