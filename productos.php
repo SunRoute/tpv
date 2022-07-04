@@ -31,17 +31,14 @@
             </div>
             <div class="col-12 col-lg-7 col-xl-8 order-lg-1 mt-5">
                 <section>
-                    <?php foreach($categorias as $categoria):?>
-                        <h2 class="text-center"><?= $categoria['categoria']; ?></h2>
-                    <?php endforeach;?>
+                   
+                    <h2 class="text-center"><?= $categorias['categoria']; ?></h2>
                     <div class="row">
                         <div class="col">
                             <ol class="breadcrumb mb-0 mt-3">
                                 <li class="breadcrumb-item"><a href="mesas.php"><span><i class="icon ion-android-home me-2"></i>INICIO</span></a></li>
                                 <li class="breadcrumb-item"><a href="categorias.php?categoria=<?php echo $_GET['categoria']?>&mesa=<?php echo $_GET['mesa'];?>"><span><i class="icon ion-social-buffer-outline me-2"></i>Categoría</span></a></li>
-                                <?php foreach($categorias as $categoria):?>
-                                    <li class="breadcrumb-item active" aria-current="page"><span><i class="icon ion-android-apps me-2"></i><?= $categoria['categoria']; ?></span></li>
-                                <?php endforeach;?>
+                                <li class="breadcrumb-item active" aria-current="page"><span><i class="icon ion-android-apps me-2"></i><?= $categorias['categoria']; ?></span></li>
                             </ol>
                         </div>
                     </div>
@@ -61,7 +58,6 @@
 
         </div>
     </div>
-
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script type="module" src="dist/main.js"></script>
 </body>

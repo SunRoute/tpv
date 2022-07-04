@@ -34,7 +34,7 @@
                     </li>
                 <?php endforeach;?>
             <?php else: ?>
-                <h4><?php echo "No has seleccionado ninguna mesa"?></h4> 
+                <h4><?php echo "No hay seleccionado ningún producto"?></h4> 
             <?php endif; ?>
         </ul>
         <div class="row mt-3">
@@ -46,7 +46,7 @@
                         </div>
                         <div class="col">
                             <?php if (!empty($total)):?>
-                                <h5 class="text-center text-white mb-0 border-start pt-1">IVA (<?= $total['iva'] ?>)</h5>
+                                <h5 class="text-center text-white mb-0 border-start pt-1">IVA (<?= $total['iva'] ?>%)</h5>
                             <?php else:?>
                                 <h5 class="text-center text-white mb-0 border-start pt-1">IVA ()</h5>
                             <?php endif; ?>
