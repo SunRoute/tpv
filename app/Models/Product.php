@@ -11,7 +11,9 @@ class Product extends Connection {
 
 	public function index($category){
 
-        $query = "SELECT * FROM productos WHERE categoria_id = $category AND visible = 1";
+        $query = "SELECT * FROM productos
+        
+        WHERE categoria_id = $category AND visible = 1";
 
         $stmt = $this->pdo->prepare($query);
         $result = $stmt->execute();
