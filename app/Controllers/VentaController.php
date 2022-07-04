@@ -30,5 +30,10 @@
 		public function filtro($fecha,$mesa){
 			return $this->venta->filtro($fecha,$mesa);
 		}
+
+		public function total($fecha){
+			return $this->venta->total($fecha);
+		}
+
     }
 ?>

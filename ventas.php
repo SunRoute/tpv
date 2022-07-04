@@ -13,6 +13,7 @@
     $mesa = !empty($_GET['mesa']) ? $_GET['mesa'] : null;
 
     $ventas = $venta->filtro($fecha,$mesa);
+    $totales = $venta->total($fecha);
 
     if(!empty($_GET['venta'])){
         $detalles = $venta->detalle($_GET['venta']);
@@ -20,6 +21,7 @@
     }
     
     $mesas = $table->index();
+    
     
 ?>
 
@@ -161,7 +163,7 @@
 
                     <div class="list-group">
                         <?php foreach($ventas as $venta):?>
-                            <?php if( isset($_GET['venta']) && $_GET['venta'] == $venta['id'] ): ?> 
+                            <?php if(isset($_GET['venta']) && $_GET['venta'] == $venta['id'] ): ?> 
                                 <a class="sale-item list-group-item list-group-item-action active" href="ventas.php?venta=<?= $venta['id'] ?>&fecha=<?= $fecha ?>&mesa=<?= $mesa; ?>" aria-current="true">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 class="mb-1">Ticket: <?= $venta['ticket']; ?></h5>
@@ -181,6 +183,40 @@
                                 </a>  
                             <?php endif; ?>
                         <?php endforeach;?>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div class="bg-secondary" id="refresh-price">
+                                <div class="row justify-content-between g-0">
+                                    <div class="col">
+                                        <h5 class="text-center text-white mb-0 pt-1">Total ingresos día</h5>
+                                    </div>
+                                    <div class="col">
+                                        <h5 class="text-center text-white mb-0 pt-1">Media día de la semana</h5>
+                                    </div>
+                                    <div class="row justify-content-between g-0">
+                                        <div class="col">
+                                            <h5 class="text-center text-white mb-0 pb-1">
+                                                <?php if(!empty($venta['total'])): ?>
+                                                    <?= $totales['total']; ?> €
+                                                <?php else: ?>
+                                                    0 €
+                                                <?php endif; ?>
+                                            </h5>
+                                        </div>
+                                        <div class="col">
+                                            <h5 class="text-center text-white mb-0 border-start pb-1">
+                                                <?php if(!empty($venta['total'])): ?>
+                                                    <?= $totales['media']; ?> €
+                                                <?php else: ?>
+                                                    0 €
+                                                <?php endif; ?>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </aside>
             </div>

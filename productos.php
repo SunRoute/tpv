@@ -31,28 +31,27 @@
             </div>
             <div class="col-12 col-lg-7 col-xl-8 order-lg-1 mt-5">
                 <section>
-                    <?php foreach($categorias as $categoria):?>
-                        <h2 class="text-center"><?= $categoria['categoria']; ?></h2>
-                    <?php endforeach;?>
+                   
+                    <h2 class="text-center"><?= $categorias['categoria']; ?></h2>
                     <div class="row">
                         <div class="col">
                             <ol class="breadcrumb mb-0 mt-3">
                                 <li class="breadcrumb-item"><a href="mesas.php"><span><i class="icon ion-android-home me-2"></i>INICIO</span></a></li>
                                 <li class="breadcrumb-item"><a href="categorias.php?categoria=<?php echo $_GET['categoria']?>&mesa=<?php echo $_GET['mesa'];?>"><span><i class="icon ion-social-buffer-outline me-2"></i>Categoría</span></a></li>
-                                <?php foreach($categorias as $categoria):?>
-                                    <li class="breadcrumb-item active" aria-current="page"><span><i class="icon ion-android-apps me-2"></i><?= $categoria['categoria']; ?></span></li>
-                                <?php endforeach;?>
+                                <li class="breadcrumb-item active" aria-current="page"><span><i class="icon ion-android-apps me-2"></i><?= $categorias['categoria']; ?></span></li>
                             </ol>
                         </div>
                     </div>
                     <div class="row mb-5">
-
-                        <?php foreach($productos as $producto):?>
-                             <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="<?= $producto['imagen_url']; ?>"></a>
-                                 <h5 class="text-center mb-0"><?= $producto['nombre']; ?></h5>
-                             </div>
-                        <?php endforeach;?>
-                        
+                        <?php if(!empty($productos)):?>
+                            <?php foreach($productos as $producto):?>
+                                 <div class="col-6 col-md-4 gy-4"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="<?= $producto['imagen_url']; ?>"></a>
+                                     <h5 class="text-center mb-0"><?= $producto['nombre']; ?></h5>
+                                </div>
+                            <?php endforeach;?>
+                        <?php else: ?>
+                            <h2><?php echo "No hay productos para esta categoría"?></h2> 
+                        <?php endif; ?>
                     </div>
                 </section>
             </div>
@@ -61,7 +60,7 @@
 
         </div>
     </div>
-    <div class="modal fade" role="dialog" tabindex="-1" id="medidas">
+    <!-- <div class="modal fade" role="dialog" tabindex="-1" id="medidas">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -77,7 +76,7 @@
                 <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button></div>
             </div>
         </div>
-    </div>
+    </div> -->
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 

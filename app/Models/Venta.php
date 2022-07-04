@@ -50,7 +50,6 @@
             INNER JOIN productos ON precios.producto_id = productos.id
             WHERE ventas.id = $venta AND ventas.activo = 1 GROUP BY productos.id";
 
-
             $stmt = $this->pdo->prepare($query);
             $result = $stmt->execute();
 
@@ -81,6 +80,17 @@
             $result = $stmt->execute();
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        }
+
+        public function total($fecha){
+
+            $query = "SELECT SUM(precio_total) AS total, (SELECT ROUND(AVG(total),2) AS media_por_dia FROM (SELECT SUM(precio_total) AS total, DAYNAME(fecha_emision) AS dia FROM ventas WHERE activo= 1 GROUP BY fecha_emision) subconsulta WHERE dia = DAYNAME('$fecha') GROUP BY dia) AS media FROM ventas WHERE fecha_emision = '$fecha' AND activo= 1";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
 
         }
 
