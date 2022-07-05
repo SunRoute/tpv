@@ -22,6 +22,11 @@
 		public function numero($mesa){
 			return $this->table->numero($mesa);
 		}
+
+		public function actualizar($estado, $table_id){
+			return $this->table->actualizar($estado, $table_id);
+		}
+		
 	}
 
 ?>

@@ -26,7 +26,7 @@
 
         }
 
-        public function total($mesa){
+        public function total($total){
 
             $query = "SELECT
             round(SUM(precios.precio_base), 2)AS base,
@@ -39,6 +39,28 @@
             INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
             INNER JOIN iva ON precios.iva_id = iva.id 
             WHERE mesa_id = $mesa AND tickets.activo = 1 AND venta_id IS NULL AND iva.activo = 1 GROUP BY iva.id";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        public function addProduct($price_id, $table_id){
+
+            $query = "INSERT INTO tickets (precio_id, mesa_id, activo, creado, actualizado) VALUES (". $price_id.", ".$table_id.", 1, NOW(), NOW())";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+            $id = $this->pdo->lastInsertId();
+
+            $query =  "SELECT tickets.id AS id, productos.nombre AS nombre, precios.precio_base AS precio_base, productos.imagen_url 
+            AS imagen_url, productos_categorias.nombre AS categoria
+            FROM tickets 
+            INNER JOIN precios ON tickets.precio_id = precios.id 
+            INNER JOIN productos ON precios.producto_id = productos.id 
+            INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
+            WHERE tickets.id = ".$id;
 
             $stmt = $this->pdo->prepare($query);
             $result = $stmt->execute();

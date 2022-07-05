@@ -1,8 +1,10 @@
 <?php
 
     require_once 'app/Controllers/TicketController.php';
+    require_once 'app/Controllers/TableController.php';
   
     use app\Controllers\TicketController;
+    use app\Controllers\TableController;
 
     header("Content-Type: application/json");
 
@@ -16,23 +18,26 @@
 
     if(isset($json->route)) {
 
-        // switch($json->route) {
+        switch($json->route) {
 
-        //     case 'addProduct':
+            case 'addProduct':
 
-        //         $ticket = new TicketController();
+                $ticket = new TicketController();
+                $table = new TableController();
 
-        //         $newProduct = $ticket->addProduct($json->price_id, $json->table_id);
+                $newProduct = $ticket->addProduct($json->price_id, $json->table_id);
+                $total = $ticket->addTotal($json->total)
+                $table->actualizar(0, $json->table_id);
 
-        //         $response = array(
-        //             'status' => 'ok',
-        //             'newProduct' => $newProduct,
-        //         );
+                $response = array(
+                    'status' => 'ok',
+                    'newProduct' => $newProduct,
+                );
 
-        //         echo json_encode($response);
+                echo json_encode($response);
 
-        //         break;
-        // }
+                break;
+        }
 
     } else {
         echo json_encode(array('error' => 'No action'));
