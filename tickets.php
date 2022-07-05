@@ -48,7 +48,7 @@
                             <?php if (!empty($total)):?>
                                 <h5 class="text-center text-white mb-0 border-start pt-1">IVA (<?= $total['iva'] ?>%)</h5>
                             <?php else:?>
-                                <h5 class="text-center text-white mb-0 border-start pt-1">IVA ()</h5>
+                                <h5 class="text-center text-white mb-0 border-start pt-1">IVA (-)</h5>
                             <?php endif; ?>
                         </div>
                         <div class="col">
@@ -58,11 +58,11 @@
                     <div class="row justify-content-between g-0">
                         <?php if (!empty($total)):?>
                             <div class="col">
-                                 <h5 class="text-center text-white mb-0 pb-1"><?= $total['base']; ?>€</h5>
+                                <h5 class="text-center text-white mb-0 pb-1"><?= $total['base']; ?>€</h5>
                             </div>
                         <?php else:?>
                             <div class="col">
-                                 <h5 class="text-center text-white mb-0 pb-1">0 €</h5>
+                                <h5 class="text-center text-white mb-0 pb-1">0€</h5>
                             </div>
                         <?php endif; ?>
                         <?php if (!empty($total)):?>
@@ -71,7 +71,7 @@
                             </div>
                         <?php else:?>
                             <div class="col">
-                                 <h5 class="text-center text-white mb-0 pb-1"> - </h5>
+                                <h5 class="text-center text-white mb-0 pb-1"> 0€ </h5>
                             </div>
                         <?php endif; ?>
                         <?php if (!empty($total)):?>
@@ -80,7 +80,7 @@
                             </div>
                             <?php else:?>
                             <div class="col">
-                                 <h5 class="text-center text-white mb-0 pb-1"> 0 € </h5>
+                                <h5 class="text-center text-white mb-0 pb-1"> 0€ </h5>
                             </div>
                         <?php endif; ?>    
                     </div>
