@@ -197,7 +197,7 @@
                                     <div class="row justify-content-between g-0">
                                         <div class="col">
                                             <h5 class="text-center text-white mb-0 pb-1">
-                                                <?php if(!empty($venta['total'])): ?>
+                                                <?php if(!empty($totales['total'])): ?>
                                                     <?= $totales['total']; ?> €
                                                 <?php else: ?>
                                                     0 €
@@ -206,7 +206,7 @@
                                         </div>
                                         <div class="col">
                                             <h5 class="text-center text-white mb-0 border-start pb-1">
-                                                <?php if(!empty($venta['total'])): ?>
+                                                <?php if(!empty($totales['total'])): ?>
                                                     <?= $totales['media']; ?> €
                                                 <?php else: ?>
                                                     0 €

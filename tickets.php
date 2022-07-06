@@ -26,7 +26,7 @@
         <ul class="list-group shadow mt-4">
             <?php if(!empty($tickets)):?>
                 <?php foreach($tickets as $ticket):?>
-                    <li class="list-group-item d-flex align-items-center"><button class="btn btn-light btn-sm me-2" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?= $ticket['imagen']; ?>">
+                    <li class="list-group-item d-flex align-items-center"><button class="delete-product btn btn-light btn-sm me-2" data-ticket="<?= $ticket['ticket_id'];?>" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?= $ticket['imagen']; ?>">
                         <div class="flex-grow-1"><span class="categoria-prod"><?= $ticket['categoria']; ?></span>
                             <h4 class="nombre-prod mb-0"><?= $ticket['producto']; ?></h4>
                         </div>
