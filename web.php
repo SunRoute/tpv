@@ -26,7 +26,7 @@
                 $table = new TableController();
 
                 $newProduct = $ticket->addProduct($json->price_id, $json->table_id);
-                $total = $ticket->addTotal($json->total)
+                $total = $ticket->total($json->total, $json->table_id)
                 $table->actualizar(0, $json->table_id);
 
                 $response = array(
