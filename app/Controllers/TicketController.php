@@ -19,8 +19,8 @@
 			return $this->ticket->index($mesa);
 		}
 
-		public function total($total){
-			return $this->ticket->total($total);
+		public function total($total, $table_id){
+			return $this->ticket->total($total, $table_id);
 		}
 		
 		public function addProduct($price_id, $table_id){

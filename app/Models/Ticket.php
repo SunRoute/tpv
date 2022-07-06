@@ -26,7 +26,7 @@
 
         }
 
-        public function total($total){
+        public function total($total, $table_id){
 
             $query = "SELECT
             round(SUM(precios.precio_base), 2)AS base,
@@ -38,7 +38,7 @@
             INNER JOIN productos ON precios.producto_id = productos.id 
             INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
             INNER JOIN iva ON precios.iva_id = iva.id 
-            WHERE mesa_id = $mesa AND tickets.activo = 1 AND venta_id IS NULL AND iva.activo = 1 GROUP BY iva.id";
+            WHERE mesa_id = $table_id AND tickets.activo = 1 AND venta_id IS NULL AND iva.activo = 1 GROUP BY iva.id";
 
             $stmt = $this->pdo->prepare($query);
             $result = $stmt->execute();
