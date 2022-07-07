@@ -26,7 +26,7 @@
         <ul class="list-group shadow mt-4">
             <?php if(!empty($tickets)):?>
                 <?php foreach($tickets as $ticket):?>
-                    <li class="list-group-item d-flex align-items-center"><button class="delete-product btn btn-light btn-sm me-2" data-ticket="<?= $ticket['ticket_id'];?>" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?= $ticket['imagen']; ?>">
+                    <li class="list-group-item d-flex align-items-center"><button class="delete-product btn btn-light btn-sm me-2" data-table="<?php echo $_GET['mesa'] ?>" data-ticket="<?= $ticket['ticket_id'];?>" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?= $ticket['imagen']; ?>">
                         <div class="flex-grow-1"><span class="categoria-prod"><?= $ticket['categoria']; ?></span>
                             <h4 class="nombre-prod mb-0"><?= $ticket['producto']; ?></h4>
                         </div>
@@ -99,7 +99,7 @@
                                 <div class="modal-body">
                                     <p class="text-center text-muted">Está a punto de borrar el pedido sin ser cobrado. ¿Está completamente seguro de realizar esta acción?</p>
                                 </div>
-                                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">CERRAR</button><button class="btn btn-success" type="button">ELIMINAR</button></div>
+                                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">CERRAR</button><button class="delete-all btn btn-success" data-table="<?php echo $_GET['mesa'] ?>" type="button">ELIMINAR</button></div>
                             </div>
                         </div>
                     </div>

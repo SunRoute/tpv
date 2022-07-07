@@ -78,6 +78,17 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
+        public function deleteAll($table_id){
+
+            $query =  "UPDATE tickets SET activo= 0, actualizado = NOW() WHERE mesa_id = $table_id";
+            
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+
     }
 
 ?>

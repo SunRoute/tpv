@@ -42,19 +42,44 @@
             case 'deleteProduct':
 
                 $ticket = new TicketController();
+                $table = new TableController();
 
                 $deleteProduct = $ticket->deleteProduct($json->ticket_id);
                 $total = $ticket->total($json->table_id);
 
+                if(empty($total)){
+                    $table->actualizar(1, $json->table_id);
+                }
                 
                 $response = array(
                     'status' => 'ok',
-                    'deleteProduct' => $deleteProduct,
+                    'total' => $total,
                 );
 
                 echo json_encode($response);
 
                 break;
+
+                case 'deleteAll':
+
+                    $ticket = new TicketController();
+                    $table = new TableController();
+    
+                    $deleteAll = $ticket->deleteAll($json->table_id);
+                    $total = $ticket->total($json->table_id);
+    
+                    if(empty($total)){
+                        $table->actualizar(1, $json->table_id);
+                    }
+                    
+                    $response = array(
+                        'status' => 'ok',
+                        'total' => $total,
+                    );
+    
+                    echo json_encode($response);
+    
+                    break;  
         }
 
     } else {
