@@ -19,13 +19,18 @@
 			return $this->ticket->index($mesa);
 		}
 
-		public function total($total, $table_id){
-			return $this->ticket->total($total, $table_id);
+		public function total($table_id){
+			return $this->ticket->total($table_id);
 		}
 		
 		public function addProduct($price_id, $table_id){
 			return $this->ticket->addProduct($price_id, $table_id);
 		}
+
+		public function deleteProduct($tickets_id){
+			return $this->ticket->deleteProduct($tickets_id);
+		}
+
 
 	}
 

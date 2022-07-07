@@ -26,12 +26,30 @@
                 $table = new TableController();
 
                 $newProduct = $ticket->addProduct($json->price_id, $json->table_id);
-                $total = $ticket->total($json->total, $json->table_id);
+                $total = $ticket->total($json->table_id);
                 $table->actualizar(0, $json->table_id);
 
                 $response = array(
                     'status' => 'ok',
+                    'total' => $total,
                     'newProduct' => $newProduct,
+                );
+
+                echo json_encode($response);
+
+                break;
+
+            case 'deleteProduct':
+
+                $ticket = new TicketController();
+
+                $deleteProduct = $ticket->deleteProduct($json->ticket_id);
+                $total = $ticket->total($json->table_id);
+
+                
+                $response = array(
+                    'status' => 'ok',
+                    'deleteProduct' => $deleteProduct,
                 );
 
                 echo json_encode($response);

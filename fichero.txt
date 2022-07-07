@@ -1,1 +1,1 @@
-addProduct
+UPDATE tickets SET activo= 0, actualizado = NOW() WHERE id = 21

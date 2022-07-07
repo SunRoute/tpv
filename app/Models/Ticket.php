@@ -12,7 +12,7 @@
 	    public function index($mesa){
 
             $query = "SELECT
-            productos.nombre AS producto, precios.precio_base AS base, productos_categorias.nombre AS categoria, productos.imagen_url AS imagen 
+            tickets.id AS ticket_id, productos.nombre AS producto, precios.precio_base AS base, productos_categorias.nombre AS categoria, productos.imagen_url AS imagen
             FROM tickets
             INNER JOIN precios ON tickets.precio_id = precios.id
             INNER JOIN productos ON precios.producto_id = productos.id
@@ -26,7 +26,7 @@
 
         }
 
-        public function total($total, $table_id){
+        public function total($table_id){
 
             $query = "SELECT
             round(SUM(precios.precio_base), 2)AS base,
@@ -62,6 +62,16 @@
             INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
             WHERE tickets.id = ".$id;
 
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        public function deleteProduct($ticket_id){
+
+            $query =  "UPDATE tickets SET activo= 0, actualizado = NOW() WHERE id = $ticket_id";
+            
             $stmt = $this->pdo->prepare($query);
             $result = $stmt->execute();
 
