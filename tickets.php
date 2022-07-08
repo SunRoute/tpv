@@ -11,7 +11,7 @@
 
     if (isset($_GET['mesa'])){
         $tickets = $ticket->index($_GET['mesa']);
-        $total = $ticket->total($_GET['mesa']);
+        // $total = $ticket->total($_GET['mesa']);
         $numero_mesa = $mesa->numero($_GET['mesa']);
     };           
 ?>
