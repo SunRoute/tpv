@@ -79,7 +79,28 @@
     
                     echo json_encode($response);
     
-                    break;  
+                    break;
+                    
+                case 'cobrar':
+
+                    $ticket = new TicketController();
+                    $table = new TableController();
+        
+                    $cobrar = $ticket->cobrar($json->table_id);
+                    $total = $ticket->total($json->table_id);
+        
+                    if(empty($total)){
+                        $table->actualizar(1, $json->table_id);
+                    }
+                        
+                    $response = array(
+                        'status' => 'ok',
+                        'total' => $total,
+                    );
+        
+                    echo json_encode($response);
+        
+                    break;       
         }
 
     } else {

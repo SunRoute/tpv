@@ -35,6 +35,11 @@
 			return $this->ticket->deleteAll($table_id);
 		}
 
+		public function formaPago(){
+			return $this->ticket->formaPago();
+		}
+
+
 
 	}
 

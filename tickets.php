@@ -11,9 +11,10 @@
 
     if (isset($_GET['mesa'])){
         $tickets = $ticket->index($_GET['mesa']);
-        // $total = $ticket->total($_GET['mesa']);
+        $total = $ticket->total($_GET['mesa']);
         $numero_mesa = $mesa->numero($_GET['mesa']);
-    };           
+    };
+    $forma_pago = $ticket->formaPago();    
 ?>
 
 <div class="col-12 col-lg-5 col-xl-4 mt-5">
@@ -113,14 +114,15 @@
                                 <div class="modal-header">
                                     <h4>Metodo de pago</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="row align-items-center flex-column">
-                                        <div class="col-6 d-lg-flex m-2"><button class="btn btn-primary w-100" type="button">EFECTIVO</button></div>
-                                        <div class="col-6 d-lg-flex m-2"><button class="btn btn-success w-100" type="button">TARJETA CRÉDITO</button></div>
-                                        <div class="col-6 d-lg-flex m-2"><button class="btn btn-danger w-100" type="button">BIZUM</button></div>
+                                <?php foreach($forma_pago as $forma_pago):?> 
+                                    <div class="modal-body">
+                                        <div class="row align-items-center flex-column">
+                                            <div class="col-6 d-lg-flex m-2"><button class="cobrar btn btn-primary w-100" data-table="<?php echo $_GET['mesa'] ?>" data-base="<?= $total['base']; ?>" data-iva="<?= $total['total_iva']; ?>" data-precio_total="<?= $total['precio_total']; ?>" data-pago="<?= $forma_pago['pago_id']; ?>" type="button"><?= $forma_pago['forma_pago']; ?></button></div>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php endforeach;?>
                                 <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">CERRAR</button></div>
+                                
                             </div>
                         </div>
                     </div>
