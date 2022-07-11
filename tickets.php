@@ -13,8 +13,10 @@
         $tickets = $ticket->index($_GET['mesa']);
         $total = $ticket->total($_GET['mesa']);
         $numero_mesa = $mesa->numero($_GET['mesa']);
+        
     };
-    $forma_pago = $ticket->formaPago();    
+    $forma_pago = $ticket->formaPago();
+        
 ?>
 
 <div class="col-12 col-lg-5 col-xl-4 mt-5">
@@ -117,7 +119,7 @@
                                 <?php foreach($forma_pago as $forma_pago):?> 
                                     <div class="modal-body">
                                         <div class="row align-items-center flex-column">
-                                            <div class="col-6 d-lg-flex m-2"><button class="cobrar btn btn-primary w-100" data-table="<?php echo $_GET['mesa'] ?>" data-base="<?= $total['base']; ?>" data-iva="<?= $total['total_iva']; ?>" data-precio_total="<?= $total['precio_total']; ?>" data-pago="<?= $forma_pago['pago_id']; ?>" type="button"><?= $forma_pago['forma_pago']; ?></button></div>
+                                            <div class="col-6 d-lg-flex m-2"><button class="cobrar btn btn-primary w-100" data-base="<?= $total['base']; ?>" data-iva="<?= $total['total_iva']; ?>" data-precio_total="<?= $total['precio_total']; ?>" data-pago="<?= $forma_pago['pago_id']; ?>" data-table="<?php echo $_GET['mesa'] ?>" type="button"><?= $forma_pago['forma_pago']; ?></button></div>
                                         </div>
                                     </div>
                                 <?php endforeach;?>

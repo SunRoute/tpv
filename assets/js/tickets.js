@@ -97,11 +97,11 @@ export let renderTickets= () => {
                 // se le da clave y valor
                 data["route"] = 'cobrar';
                 // se captura el dato del elemento html
-                data["table_id"] = cobrar.dataset.table;
-                data["pago_id"] = cobrar.dataset.pago;
                 data["base"] = cobrar.dataset.base;
                 data["total_iva"] = cobrar.dataset.iva;
                 data["precio_total"] = cobrar.dataset.precio_total;
+                data["pago_id"] = cobrar.dataset.pago;
+                data["table_id"] = cobrar.dataset.table;
 
                  
                 let response = await fetch('web.php', {

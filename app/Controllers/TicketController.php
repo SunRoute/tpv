@@ -39,6 +39,11 @@
 			return $this->ticket->formaPago();
 		}
 
+		public function cobrar($base, $iva, $precio_total, $pago, $table_id){
+			return $this->ticket->cobrar($base, $iva, $precio_total, $pago, $table_id);
+		}
+
+
 
 
 	}

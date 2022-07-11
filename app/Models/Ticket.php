@@ -101,7 +101,32 @@
 
         }
 
+        public function cobrar($table_id, $base, $iva, $precio_total, $forma_pago ){
 
-    }
+            $numero_ticket = [];
+
+            function generarTicket($numero_ticket){
+        
+                $fecha = date("ymd");
+                $ultimo_ticket = end($numero_ticket);
+                $posTicket = strpos($ultimo_ticket, $fecha);
+            
+                if($posTicket !== false){
+                    echo $ultimo_ticket + 1;
+                }else{
+                    echo $fecha."0001";
+                }
+            }
+
+            $query = "INSERT INTO ventas (numero_ticket, precio_total_base, precio_total_iva, precio_total, metodo_pago_id, mesa_id, fecha_emision, hora_emision, activo, creado, actualizado) VALUES (".generarTicket($numero_ticket).", ".$base.", ".$iva.", ".$precio_total.", ".$pago.", ".$table_id.", NOW(), NOW(), 1, NOW(), NOW())";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+            
+            }
+
+        }
+
+    
 
 ?>

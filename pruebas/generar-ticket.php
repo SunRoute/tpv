@@ -1,13 +1,13 @@
 <?php
 
-    $tickets = ['2205290001', '2205290002', '2206150001'];
+    $numero_ticket = [];
 
-    function generarTicket($tickets){
-       
+    function generarTicket($numero_ticket){
+
         $fecha = date("ymd");
-        $ultimo_ticket = end($tickets);
+        $ultimo_ticket = end($numero_ticket);
         $posTicket = strpos($ultimo_ticket, $fecha);
-        
+
         if($posTicket !== false){
             echo $ultimo_ticket + 1;
         }else{
@@ -16,7 +16,7 @@
 
     }
 
-    generarTicket($tickets);
+        generarTicket($numero_ticket);
 
 ?>
 

@@ -85,8 +85,8 @@
 
                     $ticket = new TicketController();
                     $table = new TableController();
-        
-                    $cobrar = $ticket->cobrar($json->table_id);
+                    
+                    $cobrar = $ticket->cobrar($json->base, $json->iva, $json->precio_total, $json->pago, $json->table_id);
                     $total = $ticket->total($json->table_id);
         
                     if(empty($total)){
@@ -96,6 +96,7 @@
                     $response = array(
                         'status' => 'ok',
                         'total' => $total,
+                        'cobrar' => $cobrar,
                     );
         
                     echo json_encode($response);
