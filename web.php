@@ -2,9 +2,11 @@
 
     require_once 'app/Controllers/TicketController.php';
     require_once 'app/Controllers/TableController.php';
+    require_once 'app/Controllers/VentaController.php';
   
     use app\Controllers\TicketController;
     use app\Controllers\TableController;
+    use app\Controllers\VentaController;
 
     header("Content-Type: application/json");
 
@@ -60,48 +62,44 @@
 
                 break;
 
-                case 'deleteAll':
+            case 'deleteAll':
 
-                    $ticket = new TicketController();
-                    $table = new TableController();
-    
-                    $deleteAll = $ticket->deleteAll($json->table_id);
-                    $total = $ticket->total($json->table_id);
-    
-                    if(empty($total)){
-                        $table->actualizar(1, $json->table_id);
-                    }
-                    
-                    $response = array(
-                        'status' => 'ok',
-                        'total' => $total,
-                    );
-    
-                    echo json_encode($response);
-    
-                    break;
-                    
-                case 'cobrar':
+                $ticket = new TicketController();
+                $table = new TableController();
 
-                    $ticket = new TicketController();
-                    $table = new TableController();
+                $deleteAll = $ticket->deleteAll($json->table_id);
+                $total = $ticket->total($json->table_id);
+
+                $table->actualizar(1, $json->table_id);
+                
+                $response = array(
+                    'status' => 'ok',
+                    'total' => $total,
+                );
+
+                echo json_encode($response);
+
+                break;
                     
-                    $cobrar = $ticket->cobrar($json->base, $json->iva, $json->precio_total, $json->pago, $json->table_id);
-                    $total = $ticket->total($json->table_id);
-        
-                    if(empty($total)){
-                        $table->actualizar(1, $json->table_id);
-                    }
-                        
-                    $response = array(
-                        'status' => 'ok',
-                        'total' => $total,
-                        'cobrar' => $cobrar,
-                    );
-        
-                    echo json_encode($response);
-        
-                    break;       
+            case 'cobrar':
+
+                $ticket = new TicketController();
+                $table = new TableController();
+                $venta = new VentaController();
+
+                $total = $ticket->total($json->table_id);
+                $venta_id = $venta->cobrar($total['base'], $total['total_iva'], $total['precio_total'], $json->pago_id, $json->table_id);
+                $ventaCerrada = $ticket->ventaCerrada($json->table_id, $venta_id);
+                $table->actualizar(1, $json->table_id);
+                    
+                $response = array(
+                    'status' => 'ok',
+                );
+    
+                echo json_encode($response);
+    
+                break;
+                 
         }
 
     } else {

@@ -91,7 +91,30 @@
             $result = $stmt->execute();
 
             return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
 
+        public function ultimo_ticket(){
+
+            $query = "SELECT numero_ticket AS numero_ticket FROM ventas ORDER BY id DESC
+            LIMIT 1";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        }
+
+        public function cobrar($numero_ticket, $base, $iva, $precio_total, $pago, $table_id){
+
+            $query = "INSERT INTO ventas (numero_ticket, precio_total_base, precio_total_iva, precio_total, metodo_pago_id, mesa_id, fecha_emision, hora_emision, activo, creado, actualizado) VALUES (".$numero_ticket.", ".$base.", ".$iva.", ".$precio_total.", ".$pago.", ".$table_id.", CURDATE(), CURTIME(), 1, NOW(), NOW())";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+
+            $id = $this->pdo->lastInsertId();
+            
+            return $id;
         }
 
     }

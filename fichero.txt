@@ -1,0 +1,1 @@
+INSERT INTO ventas (numero_ticket, precio_total_base, precio_total_iva, precio_total, metodo_pago_id, mesa_id, fecha_emision, hora_emision, activo, creado, actualizado) VALUES (2207110002, 17.00, 1.70, 18.70, 2, 1, CURDATE(), CURTIME(), 1, NOW(), NOW())

@@ -119,7 +119,7 @@
                                 <?php foreach($forma_pago as $forma_pago):?> 
                                     <div class="modal-body">
                                         <div class="row align-items-center flex-column">
-                                            <div class="col-6 d-lg-flex m-2"><button class="cobrar btn btn-primary w-100" data-base="<?= $total['base']; ?>" data-iva="<?= $total['total_iva']; ?>" data-precio_total="<?= $total['precio_total']; ?>" data-pago="<?= $forma_pago['pago_id']; ?>" data-table="<?php echo $_GET['mesa'] ?>" type="button"><?= $forma_pago['forma_pago']; ?></button></div>
+                                            <div class="col-6 d-lg-flex m-2"><button class="cobrar btn btn-primary w-100" data-pago="<?= $forma_pago['pago_id']; ?>" data-table="<?php echo $_GET['mesa'] ?>" type="button"><?= $forma_pago['forma_pago']; ?></button></div>
                                         </div>
                                     </div>
                                 <?php endforeach;?>
