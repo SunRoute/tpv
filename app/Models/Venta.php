@@ -21,7 +21,6 @@
             $result = $stmt->execute();
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         }
 
         public function detalle($venta){
@@ -36,7 +35,6 @@
             $result = $stmt->execute();
 
             return $stmt->fetch(PDO::FETCH_ASSOC);
-
         }
 
         public function pedido($venta){
@@ -54,7 +52,6 @@
             $result = $stmt->execute();
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         }
 
         public function filtro($fecha,$mesa){
@@ -80,7 +77,6 @@
             $result = $stmt->execute();
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         }
 
         public function total($fecha){
@@ -102,7 +98,6 @@
             $result = $stmt->execute();
 
             return $stmt->fetch(PDO::FETCH_ASSOC);
-        
         }
 
         public function cobrar($numero_ticket, $base, $iva, $precio_total, $pago, $table_id){
@@ -117,6 +112,19 @@
             return $id;
         }
 
+
+        public function ocupacion($venta_id, $creacion_ticket){
+
+            $query = "UPDATE ventas SET duracion_servicio = TIMESTAMPDIFF(MINUTE, $creacion_ticket, NOW())
+            WHERE ventas.id = $venta_id";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+    
+        }
+        
+
+        
     }
 
 ?>     

@@ -39,11 +39,13 @@
 			return $this->ticket->formaPago();
 		}
 
+		public function ultimoTicketCreado($venta_id){
+			return $this->ticket->ultimoTicketCreado($venta_id);
+		}
+
 		public function ventaCerrada($table_id, $venta_id){
 			return $this->ticket->ventaCerrada($table_id, $venta_id);
 		}
-
-
 	}
 
 ?>

@@ -55,5 +55,10 @@
 			}
 		}
 
+		public function ocupacion($venta_id, $creacion_ticket){
+			return $this->venta->ocupacion($venta_id, $creacion_ticket);
+		}
+
+
     }
 ?>

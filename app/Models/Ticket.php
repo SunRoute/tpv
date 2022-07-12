@@ -99,6 +99,16 @@
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+        
+        public function ultimoTicketCreado($venta_id){
+
+            $query = "SELECT creado FROM tickets WHERE venta_id = $venta_id LIMIT 1";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
 
         public function ventaCerrada($table_id, $venta_id){
 
@@ -111,7 +121,8 @@
 
             return $stmt->fetch(PDO::FETCH_ASSOC);
 
-        }    
+        }
+        
     }
 
     

@@ -90,6 +90,9 @@
                 $total = $ticket->total($json->table_id);
                 $venta_id = $venta->cobrar($total['base'], $total['total_iva'], $total['precio_total'], $json->pago_id, $json->table_id);
                 $ventaCerrada = $ticket->ventaCerrada($json->table_id, $venta_id);
+                $creacion_ticket = $ticket->ultimoTicketCreado($venta_id);
+                $ocupacion = $venta->ocupacion($venta_id, $creacion_ticket);
+
                 $table->actualizar(1, $json->table_id);
                     
                 $response = array(
