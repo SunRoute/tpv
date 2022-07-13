@@ -20,10 +20,12 @@
     <link rel="stylesheet" href="assets/css/Abel.css">
     <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="assets/fonts/line-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
+    <?php include('menu.php') ?>
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -45,7 +47,7 @@
                     <div class="row mb-5">
 
                         <?php foreach($productos as $producto):?>
-                             <div class="add-product col-6 col-md-4 gy-4" data-table="<?php echo $_GET['mesa'] ?>" data-price="<?= $producto['precio_id']; ?>"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0" role="button" href="#medidas" data-bs-toggle="modal"><img src="<?= $producto['imagen_url']; ?>"></a>
+                             <div class="add-product col-6 col-md-4 gy-4" data-table="<?php echo $_GET['mesa'] ?>" data-price="<?= $producto['precio_id']; ?>"><a class="btn g-4 w-100 shadow cat-prod rounded-0 p-0"><img src="<?= $producto['imagen_url']; ?>"></a>
                                  <h5 class="text-center mb-0"><?= $producto['nombre']; ?></h5>
                              </div>
                         <?php endforeach;?>

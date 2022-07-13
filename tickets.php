@@ -15,6 +15,7 @@
         $numero_mesa = $mesa->numero($_GET['mesa']);
         
     };
+
     $forma_pago = $ticket->formaPago();
         
 ?>
@@ -26,7 +27,7 @@
         <?php else: ?>
             <h2 class="text-center">TICKET</h2>    
         <?php endif; ?>
-        <ul class="list-group shadow mt-4">
+        <ul class="ticket-container list-group shadow mt-4">
             <?php if(!empty($tickets)):?>
                 <?php foreach($tickets as $ticket):?>
                     <li class="list-group-item d-flex align-items-center"><button class="delete-product btn btn-light btn-sm me-2" data-table="<?php echo $_GET['mesa'] ?>" data-ticket="<?= $ticket['ticket_id'];?>" type="button"><i class="la la-close"></i></button><img class="img-ticket" src="<?= $ticket['imagen']; ?>">
@@ -36,22 +37,32 @@
                         <p class="precio-prod"><?= $ticket['base']; ?></p>
                     </li>
                 <?php endforeach;?>
+                <h4 class="no-products d-none"><?php echo "No hay seleccionado ningún producto"?></h4> 
             <?php else: ?>
-                <h4><?php echo "No hay seleccionado ningún producto"?></h4> 
+                <h4 class="no-products"><?php echo "No hay seleccionado ningún producto"?></h4> 
+            <?php endif; ?>
+
+            <?php if(isset($numero_mesa)): ?>
+                <li class="add-product-layout list-group-item d-flex align-items-center d-none"><button class="delete-product btn btn-light btn-sm me-2" type="button" data-ticket="" data-table="<?php echo $_GET['mesa'] ?>"><i class="la la-close"></i></button><img class="img-ticket" src="">
+                    <div class="flex-grow-1"><span class="categoria-prod"></span>
+                        <h4 class="nombre-prod mb-0">
+                    </div>
+                    <p class="precio-prod"></p>
+                </li>
             <?php endif; ?>
         </ul>
         <div class="row mt-3">
             <div class="col">
-                <div class="bg-secondary">
+                <div class="totals bg-secondary">
                     <div class="row justify-content-between g-0">
                         <div class="col">
                             <h5 class="text-center text-white mb-0 pt-1">B. Imponible</h5>
                         </div>
                         <div class="col">
                             <?php if (!empty($total)):?>
-                                <h5 class="text-center text-white mb-0 border-start pt-1">IVA (<?= $total['iva'] ?>%)</h5>
+                                <h5 class="text-center text-white mb-0 border-start pt-1">IVA (<span class="iva-percent"><?= $total['iva'] ?> </span>%)</h5>
                             <?php else:?>
-                                <h5 class="text-center text-white mb-0 border-start pt-1">IVA (-)</h5>
+                                <h5 class="text-center text-white mb-0 border-start pt-1">IVA (<span class="iva-percent">-</span>)</h5>
                             <?php endif; ?>
                         </div>
                         <div class="col">
@@ -61,29 +72,29 @@
                     <div class="row justify-content-between g-0">
                         <?php if (!empty($total)):?>
                             <div class="col">
-                                <h5 class="text-center text-white mb-0 pb-1"><?= $total['base']; ?>€</h5>
+                                <h5 class="text-center text-white mb-0 pb-1"><span class="base"><?= $total['base']; ?></span>€</h5>
                             </div>
                         <?php else:?>
                             <div class="col">
-                                <h5 class="text-center text-white mb-0 pb-1">0€</h5>
+                                <h5 class="text-center text-white mb-0 pb-1"><span class="base">0</span>€</h5>
                             </div>
                         <?php endif; ?>
                         <?php if (!empty($total)):?>
                             <div class="col">
-                                <h5 class="text-center text-white mb-0 border-start pb-1"><?= $total['total_iva']; ?>€</h5>
+                                <h5 class="text-center text-white mb-0 border-start pb-1"><span class="iva"><?= $total['total_iva']; ?></span>€</h5>
                             </div>
                         <?php else:?>
                             <div class="col">
-                                <h5 class="text-center text-white mb-0 pb-1"> 0€ </h5>
+                                <h5 class="text-center text-white mb-0 pb-1"><span class="iva">0</span>€ </h5>
                             </div>
                         <?php endif; ?>
                         <?php if (!empty($total)):?>
                             <div class="col">
-                                <h5 class="text-center text-white mb-0 bg-dark pb-1"><?= $total['precio_total']; ?>€</h5>
+                                <h5 class="text-center text-white mb-0 bg-dark pb-1"><span class="total"><?= $total['precio_total']; ?></span>€</h5>
                             </div>
                             <?php else:?>
                             <div class="col">
-                                <h5 class="text-center text-white mb-0 pb-1"> 0€ </h5>
+                                <h5 class="text-center text-white mb-0 pb-1"><span class="total">0</span>€ </h5>
                             </div>
                         <?php endif; ?>    
                     </div>
@@ -102,7 +113,7 @@
                                 <div class="modal-body">
                                     <p class="text-center text-muted">Está a punto de borrar el pedido sin ser cobrado. ¿Está completamente seguro de realizar esta acción?</p>
                                 </div>
-                                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">CERRAR</button><button class="delete-all btn btn-success" data-table="<?php echo $_GET['mesa'] ?>" type="button">ELIMINAR</button></div>
+                                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">CERRAR</button><button data-bs-dismiss="modal" class="delete-all btn btn-success" data-table="<?php echo $_GET['mesa'] ?>" type="button">ELIMINAR</button></div>
                             </div>
                         </div>
                     </div>
@@ -119,7 +130,7 @@
                                 <?php foreach($forma_pago as $forma_pago):?> 
                                     <div class="modal-body">
                                         <div class="row align-items-center flex-column">
-                                            <div class="col-6 d-lg-flex m-2"><button class="cobrar btn btn-primary w-100" data-pago="<?= $forma_pago['pago_id']; ?>" data-table="<?php echo $_GET['mesa'] ?>" type="button"><?= $forma_pago['forma_pago']; ?></button></div>
+                                            <div class="col-6 d-lg-flex m-2"><button class="cobrar btn btn-primary w-100" data-bs-dismiss="modal" data-pago="<?= $forma_pago['pago_id']; ?>" data-table="<?php echo $_GET['mesa'] ?>" type="button"><?= $forma_pago['forma_pago']; ?></button></div>
                                         </div>
                                     </div>
                                 <?php endforeach;?>

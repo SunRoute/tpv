@@ -115,7 +115,7 @@
 
         public function ocupacion($venta_id, $creacion_ticket){
 
-            $query = "UPDATE ventas SET duracion_servicio = TIMESTAMPDIFF(MINUTE, $creacion_ticket, NOW())
+            $query = "UPDATE ventas SET duracion_servicio = TIMESTAMPDIFF(MINUTE,'$creacion_ticket', NOW())
             WHERE ventas.id = $venta_id";
 
             $stmt = $this->pdo->prepare($query);
