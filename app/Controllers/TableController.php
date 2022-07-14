@@ -27,6 +27,18 @@
 			return $this->table->actualizar($estado, $table_id);
 		}
 		
+		public function storeTable($id){
+			return $this->table->storeTable($id);
+		}
+
+		public function showTable($id){
+			return $this->table->showTable($id);
+		}
+
+		public function deleteTable($id){
+			return $this->table->deleteTable($id);
+		}
+		
 	}
 
 ?>

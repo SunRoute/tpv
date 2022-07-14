@@ -45,6 +45,40 @@
 
         }
 
+        public function store($id){
+            
+            if(empty($id)){
+                $query = "UPDATE";
+            }
+                $stmt = $this->pdo->prepare($query);
+                $result = $stmt->execute();
+
+                
+
+           
+        }
+
+        public function show($id){
+
+            $query = "";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+
+        }
+
+        public function delete($id){
+
+            $query = "";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+
+        }
+
+
+
+
 
     }
 

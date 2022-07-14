@@ -102,7 +102,50 @@
                 echo json_encode($response);
     
                 break;
-                 
+
+            case 'storeTable':
+
+                $table = new TableController();
+                $new_table = $table->store($json->id, $json->numero, $json->ubicacion, $json->pax);
+
+                $response = array(
+                    'status' => 'ok',
+                    'id' => $json->id,
+                    'newElement' => $new_table
+                );
+
+                echo json_encode($response);
+
+                break;
+            
+            case 'showTable':
+
+                $table = new TableController();
+                $table = $table->show($json->id);
+
+                $response = array(
+                    'status' => 'ok',
+                    'element' => $table,
+                );
+
+                echo json_encode($response);
+
+                break;
+            
+            case 'deleteTable':
+
+                $table = new TableController();
+                $table->delete($json->id);
+
+                $response = array(
+                    'status' => 'ok',
+                    'id' => $json->id
+                );
+
+                echo json_encode($response);
+
+                break;
+                
         }
 
     } else {
