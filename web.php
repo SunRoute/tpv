@@ -106,6 +106,7 @@
             case 'storeTable':
 
                 $table = new TableController();
+
                 $new_table = $table->store($json->id, $json->numero, $json->ubicacion, $json->pax);
 
                 $response = array(

@@ -49,32 +49,39 @@
             
             if(empty($id)){
                 $query = "INSERT INTO mesas (numero, ubicacion, pax, estado, activo, creado, actualizado)
-                VALUES (".$numero.",".$ubicacion.",".$pax.", 1, 1, NOW(), NOW())";
-
+                VALUES ($numero,'$ubicacion',$pax, 1, 1, NOW(), NOW())";
+                
                 $stmt = $this->pdo->prepare($query);
                 $result = $stmt->execute();
-                $this->pdo->lastInsertId();
+
+                $query = "SELECT * FROM mesas WHERE id =".$this->pdo->lastInsertId();
 
             }else{
-                $query = "UPDATE mesas SET numero = $numero, ubicacion = $ubicacion, pax = $pax, actualizado = NOW()
+                $query = "UPDATE mesas SET numero = $numero, ubicacion = '$ubicacion', pax = $pax, actualizado = NOW()
                 WHERE id = $id";
     
                 $stmt = $this->pdo->prepare($query);
-                $result = $stmt->execute();
+                $result = $stmt->execute();   
+
+                $query = "SELECT * FROM mesas WHERE id =".$id;
             }
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
            
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+
         }
 
         public function show($table){
 
-            $query = "SELECT numero, ubicacion, pax FROM mesas 
+            $query = "SELECT * FROM mesas 
             WHERE id = $table";
 
             $stmt = $this->pdo->prepare($query);
             $result = $stmt->execute();
 
             return $stmt->fetch(PDO::FETCH_ASSOC);
-
         }
 
         public function delete($id){

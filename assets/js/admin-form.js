@@ -10,6 +10,7 @@ export let renderAdminForm = () => {
         
         createFormButton.addEventListener("click", (event) => {
             adminForm.reset();
+            document.getElementsByName('id')[0].value = '';
         });
     }
 
@@ -47,6 +48,7 @@ export let renderAdminForm = () => {
                 })
                 .then(json => {
                     // Si la id viene vacía, 
+
                     if(json.id == "") {
                         // Trae el clon del html y se le enchufa el data-element con su id al principio de la tabla (bucle)
                         let newElement = createLayout.cloneNode(true);
@@ -54,6 +56,7 @@ export let renderAdminForm = () => {
                         newElement.dataset.element = json.newElement.id;
                         // Del elemento clonado se busca en el botón eliminar el data-id
                         newElement.querySelector('.delete-table-button').dataset.id = json.newElement.id;
+                        newElement.querySelector('.edit-table-button').dataset.id = json.newElement.id;
 
                         // El último registro añadido en la tabla. Todos los campos son recogidos y dentro del elemento clonado busca los datos y les enchufa el valor
                         Object.entries(json.newElement).forEach(([key, value]) => {
@@ -70,7 +73,11 @@ export let renderAdminForm = () => {
                         // y para editar...
                         let element = document.querySelector("[data-element='" + json.id + "']");
 
+                        console.log(json.newElement);
+
+
                         Object.entries(json.newElement).forEach(([key, value]) => {
+
                             if(element.querySelector("." + key)){
                                 element.querySelector("." + key).innerHTML = value;
                             }

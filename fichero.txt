@@ -1,1 +1,5 @@
-INSERT INTO ventas (numero_ticket, precio_total_base, precio_total_iva, precio_total, metodo_pago_id, mesa_id, fecha_emision, hora_emision, activo, creado, actualizado) VALUES (2207130008, 5.50, 0.55, 6.05, 1, 1, CURDATE(), CURTIME(), 1, NOW(), NOW())
+SELECT
+                ventas.id AS id, ventas.numero_ticket AS ticket, ventas.hora_emision AS hora, mesas.numero AS mesa, ventas.precio_total AS total
+                FROM ventas
+                INNER JOIN mesas ON ventas.mesa_id = mesas.id
+                WHERE ventas.fecha_emision = '2022-07-13'
