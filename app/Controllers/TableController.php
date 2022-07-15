@@ -27,16 +27,16 @@
 			return $this->table->actualizar($estado, $table_id);
 		}
 		
-		public function storeTable($id){
-			return $this->table->storeTable($id);
+		public function store($id, $numero, $ubicacion, $pax){
+			return $this->table->store($id, $numero, $ubicacion, $pax);
 		}
 
-		public function showTable($id){
-			return $this->table->showTable($id);
+		public function show($table){
+			return $this->table->show($table);
 		}
 
-		public function deleteTable($id){
-			return $this->table->deleteTable($id);
+		public function delete($table){
+			return $this->table->delete($table);
 		}
 		
 	}
