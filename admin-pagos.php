@@ -1,16 +1,14 @@
 <?php
 
-	require_once 'app/Controllers/TableController.php';
+	require_once 'app/Controllers/PaymentMethodController.php';
 
-	use app\Controllers\TableController;
+	use app\Controllers\PaymentMethodController;
 
-	$table = new TableController();
-	$tables = $table->index();
-
-    
-
+	$pago = new PaymentMethodController();
+	$pagos = $pago->index();
 	
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,13 +32,13 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center mt-3 border titular"><small class="small-admin">PANEL DE ADMINISTRACIÓN</small>MESAS</h1>
+                <h1 class="text-center mt-3 border titular"><small class="small-admin">PANEL DE ADMINISTRACIÓN</small>MÉTODOS DE PAGO</h1>
             </div>
             <div class="col-12 mt-5">
                 <section>
                     <div class="row">
                         <div class="col d-flex justify-content-end">
-                            <button type="button" class="create-form-button btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addArticle">+ Añadir mesa</button>
+                            <button type="button" class="create-form-button btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addArticle">+ Añadir método de pago</button>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -48,42 +46,35 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                    <th scope="col">Nº mesa</th>
-                                    <th scope="col">Ubicación</th>
-                                    <th scope="col">Nº Comensales</th>
-                                    <th scope="col">Opciones</th>
+                                        <th scope="col">Identificación</th>
+                                        <th scope="col">Forma de pago</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($tables as $table): ?>
-                                        <tr class="table-element" data-element="<?= $table['id'] ?>">
-                                            <th scope="row" class="numero">
-                                                <?= $table['numero'] ?>
+                                    <?php foreach($pagos as $pago): ?>
+                                        <tr class="table-element" data-element="<?= $pago['id'] ?>">
+                                            <th scope="row" class="id">
+                                                <?= $pago['id'] ?>
                                             </th>
-                                            <td class="ubicacion">
-                                                <?= $table['ubicacion'] ?>
+                                            <td class="nombre">
+                                                <?= $pago['nombre'] ?>
                                             </td>
-                                            <td class="pax">
-                                                <?= $table['pax'] ?>
-                                            </td>
-                                            <!-- Ruta para mostrar y modificar un registro -->
                                             <td class="opciones">
-                                                <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="<?= $table['id'] ?>" data-route="showTable" data-bs-target="#addArticle">
+                                                <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="<?= $pago['id'] ?>" data-route="showPaymentMethod" data-bs-target="#addArticle">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" class="delete-table-button btn btn-danger" data-id="<?= $table['id'] ?>" data-bs-toggle="modal" data-bs-target="#deleteArticle">
+                                                <button type="button" class="delete-table-button btn btn-danger" data-id="<?= $pago['id'] ?>" data-bs-toggle="modal" data-bs-target="#deleteArticle">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
-                                    <!-- Este dato es invisible mediante d-none. Cada cajita tiene la misma clase que los inputs de la tabla. Clona en admin-form... Mientras exista la plantilla que tenga las mismas clases, se aplicarán los datos-->
+                                    
                                     <tr class="create-layout table-element d-none" data-element="">
-                                        <th scope="row" class="numero"></th>
-                                        <td class="ubicacion"></td>
-                                        <td class="pax"></td>
+                                        <th scope="row" class="id"></th>
+                                        <td class="nombre"></td>
                                         <td class="opciones">
-                                            <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="" data-route="showTable" data-bs-target="#addArticle">
+                                            <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="" data-route="showPaymentMethod" data-bs-target="#addArticle">
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                             <button type="button" class="delete-table-button btn btn-danger" data-id="" data-bs-toggle="modal" data-bs-target="#deleteArticle">
@@ -127,40 +118,16 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addArticleLabel">AÑADIR MESA</h5>
+                    <h5 class="modal-title" id="addArticleLabel">AÑADIR MÉTODO DE PAGO</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Ruta para crear registro nuevo. Se dirige a su caso de web.php -->
-                    <form class="admin-form" data-route="storeTable">
+                    
+                    <form class="admin-form" data-route="storePaymentMethod">
                         <input type="hidden" name="id" value="">
                         <div class="mb-3">
-                            <label for="numero" class="form-label">Número de mesa</label>
-                            <input type="number" class="form-control" name="numero" value="">
-                        </div>
-                        <div class="mb-3">
-                            <label for="ubicacion" class="form-label">Ubicación</label>
-                            <select class="form-select" aria-label="Default select example" name="ubicacion">
-                                <option selected>Selecciona ubicación</option>
-                                <option value="local">Local</option>
-                                <option value="terraza">Terraza</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="ubicacion" class="form-label">Número de comensales</label>
-                            <select class="form-select" aria-label="Default select example" name="pax">
-                                <option selected>Selecciona número de comensales</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
+                            <label for="nombre" class="form-label">Método de pago</label>
+                            <input type="text" class="form-control" name="nombre" value="">
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-secondary mt-3 me-2" data-bs-dismiss="modal">CERRAR</button>
@@ -178,16 +145,16 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteArticleLabel">ELIMINAR MESA Nº 1</h5>
+                    <h5 class="modal-title" id="deleteArticleLabel">ELIMINAR FORMA DE PAGO</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-center text-muted">Está a punto de borrar una mesa. ¿Está completamente seguro de realizar esta acción?</p>
+                    <p class="text-center text-muted">Está a punto de borrar un método de pago. ¿Está completamente seguro de realizar esta acción?</p>
                 </div>
-                <!-- Ruta para eliminar un registro -->
+               
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                    <button type="button" class="delete-table-modal btn btn-primary" data-bs-dismiss="modal" data-route="deleteTable">ELIMINAR</button>
+                    <button type="button" class="delete-table-modal btn btn-primary" data-bs-dismiss="modal" data-route="deletePaymentMethod">ELIMINAR</button>
                 </div>
             </div>
         </div>

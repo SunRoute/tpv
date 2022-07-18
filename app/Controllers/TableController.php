@@ -35,8 +35,8 @@
 			return $this->table->show($table);
 		}
 
-		public function delete($table){
-			return $this->table->delete($table);
+		public function delete($id){
+			return $this->table->delete($id);
 		}
 		
 	}

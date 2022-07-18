@@ -3,10 +3,13 @@
     require_once 'app/Controllers/TicketController.php';
     require_once 'app/Controllers/TableController.php';
     require_once 'app/Controllers/VentaController.php';
+    require_once 'app/Controllers/PaymentMethodController.php';
+
   
     use app\Controllers\TicketController;
     use app\Controllers\TableController;
     use app\Controllers\VentaController;
+    use app\Controllers\PaymentMethodController;
 
     header("Content-Type: application/json");
 
@@ -146,6 +149,50 @@
                 echo json_encode($response);
 
                 break;
+
+                case 'storePaymentMethod':
+
+                    $pago = new PaymentMethodController();
+    
+                    $new_pago = $pago->store($json->id, $json->nombre);
+    
+                    $response = array(
+                        'status' => 'ok',
+                        'id' => $json->id,
+                        'newElement' => $new_pago
+                    );
+    
+                    echo json_encode($response);
+    
+                    break;
+                
+                case 'showPaymentMethod':
+    
+                    $pago = new PaymentMethodController();
+                    $pago = $pago->show($json->id);
+    
+                    $response = array(
+                        'status' => 'ok',
+                        'element' => $pago,
+                    );
+    
+                    echo json_encode($response);
+    
+                    break;
+                
+                case 'deletePaymentMethod':
+    
+                    $pago = new PaymentMethodController();
+                    $pago->delete($json->id);
+    
+                    $response = array(
+                        'status' => 'ok',
+                        'id' => $json->id
+                    );
+    
+                    echo json_encode($response);
+    
+                    break;    
                 
         }
 

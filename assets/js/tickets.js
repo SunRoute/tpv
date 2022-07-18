@@ -12,8 +12,6 @@ export let renderTickets= () => {
 
     // Se crea un bucle porque se trata de diferentes botones
     deleteProducts.forEach(deleteProduct => {
-        
-        console.log("hola");
 
         deleteProduct.addEventListener("click", (event) => {
 

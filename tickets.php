@@ -2,12 +2,15 @@
 
     require_once 'app/Controllers/TicketController.php';
     require_once 'app/Controllers/TableController.php';
+    require_once 'app/Controllers/PaymentMethodController.php';
 
     use app\Controllers\TicketController;
     use app\Controllers\TableController;
+    use app\Controllers\PaymentMethodController;
 
     $ticket = new TicketController();
     $mesa = new TableController();
+    $pago = new PaymentMethodController();
 
     if (isset($_GET['mesa'])){
         $tickets = $ticket->index($_GET['mesa']);
@@ -16,7 +19,7 @@
         
     };
 
-    $forma_pago = $ticket->formaPago();
+    $forma_pago = $pago->formaPago();
         
 ?>
 

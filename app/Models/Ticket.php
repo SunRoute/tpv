@@ -88,17 +88,17 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
-        public function formaPago(){
+        // public function formaPago(){
 
-            $query = "SELECT id AS pago_id, nombre AS forma_pago
-            FROM metodos_pagos
-            WHERE metodos_pagos.id";
+        //     $query = "SELECT id AS pago_id, nombre AS forma_pago
+        //     FROM metodos_pagos
+        //     WHERE metodos_pagos.id";
 
-            $stmt = $this->pdo->prepare($query);
-            $result = $stmt->execute();
+        //     $stmt = $this->pdo->prepare($query);
+        //     $result = $stmt->execute();
 
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
+        //     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // }
         
         public function ultimoTicketCreado($venta_id){
 
