@@ -1,14 +1,13 @@
 <?php
 
-	require_once 'app/Controllers/PaymentMethodController.php';
+    require_once 'app/Controllers/ProductCategoryController.php';
 
-	use app\Controllers\PaymentMethodController;
+    use app\Controllers\ProductCategoryController;
 
-	$pago = new PaymentMethodController();
-	$pagos = $pago->index();
-	
+    $categoria = new ProductCategoryController();
+    $categorias = $categoria->index();
+
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,13 +31,13 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center mt-3 border titular"><small class="small-admin">PANEL DE ADMINISTRACIÓN</small>MÉTODOS DE PAGO</h1>
+                <h1 class="text-center mt-3 border titular"><small class="small-admin">PANEL DE ADMINISTRACIÓN</small>CATEGORÍAS</h1>
             </div>
             <div class="col-12 mt-5">
                 <section>
                     <div class="row">
                         <div class="col d-flex justify-content-end">
-                            <button type="button" class="create-form-button btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addArticle">+ Añadir método de pago</button>
+                            <button type="button" class="create-form-button btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addArticle">+ Añadir categoría</button>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -46,20 +45,20 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Forma de pago</th>
+                                        <th scope="col">Categoría</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($pagos as $pago): ?>
-                                        <tr class="table-element" data-element="<?= $pago['id'] ?>">
+                                    <?php foreach($categorias as $categoria): ?>
+                                        <tr class="table-element" data-element="<?= $categoria['id'] ?>">
                                             <th scope="row" class="nombre">
-                                                <?= $pago['nombre'] ?>
+                                                <?= $categoria['nombre'] ?>
                                             </th>
                                             <td class="opciones">
-                                                <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="<?= $pago['id'] ?>" data-route="showPaymentMethod" data-bs-target="#addArticle">
+                                                <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="<?= $pago['id'] ?>" data-route="showCategoria" data-bs-target="#addArticle">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" class="delete-table-button btn btn-danger" data-id="<?= $pago['id'] ?>" data-bs-toggle="modal" data-bs-target="#deleteArticle">
+                                                <button type="button" class="delete-table-button btn btn-danger" data-id="<?= $categoria['id'] ?>" data-bs-toggle="modal" data-bs-target="#deleteArticle">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </td>
@@ -69,7 +68,7 @@
                                     <tr class="create-layout table-element d-none" data-element="">
                                         <th scope="row" class="nombre"></th>
                                         <td class="opciones">
-                                            <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="" data-route="showPaymentMethod" data-bs-target="#addArticle">
+                                            <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="" data-route="showCategoria" data-bs-target="#addArticle">
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                             <button type="button" class="delete-table-button btn btn-danger" data-id="" data-bs-toggle="modal" data-bs-target="#deleteArticle">
@@ -113,15 +112,15 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addArticleLabel">AÑADIR MÉTODO DE PAGO</h5>
+                    <h5 class="modal-title" id="addArticleLabel">AÑADIR CATEGORÍA</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     
-                    <form class="admin-form" data-route="storePaymentMethod">
+                    <form class="admin-form" data-route="storeCategoria">
                         <input type="hidden" name="id" value="">
                         <div class="mb-3">
-                            <label for="nombre" class="form-label">Método de pago</label>
+                            <label for="nombre" class="form-label">Categoría</label>
                             <input type="text" class="form-control" name="nombre" value="">
                         </div>
                         <div class="d-flex justify-content-end">
@@ -140,16 +139,16 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteArticleLabel">ELIMINAR FORMA DE PAGO</h5>
+                    <h5 class="modal-title" id="deleteArticleLabel">ELIMINAR CATEGORÍA</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-center text-muted">Está a punto de borrar un método de pago. ¿Está completamente seguro de realizar esta acción?</p>
+                    <p class="text-center text-muted">Está a punto de borrar una categoría. ¿Está completamente seguro de realizar esta acción?</p>
                 </div>
                
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                    <button type="button" class="delete-table-modal btn btn-primary" data-bs-dismiss="modal" data-route="deletePaymentMethod">ELIMINAR</button>
+                    <button type="button" class="delete-table-modal btn btn-primary" data-bs-dismiss="modal" data-route="deleteCategoria">ELIMINAR</button>
                 </div>
             </div>
         </div>

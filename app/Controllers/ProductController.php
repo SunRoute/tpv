@@ -21,6 +21,22 @@
 		public function categoria($category){
 			return $this->product->categoria($category);
 		}
+		
+		public function store($id, $nombre){
+			return $this->product->store($id, $nombre);
+		}
+
+		public function show($product){
+			return $this->product->show($product);
+		}
+
+		public function delete($id){
+			return $this->product->delete($id);
+		}
+
+		public function administracion($id){
+			return $this->product->administracion($id);
+		}
 	}	
 
 ?>

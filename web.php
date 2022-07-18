@@ -4,12 +4,16 @@
     require_once 'app/Controllers/TableController.php';
     require_once 'app/Controllers/VentaController.php';
     require_once 'app/Controllers/PaymentMethodController.php';
+    require_once 'app/Controllers/IvaController.php';
+    require_once 'app/Controllers/ProductCategoryController.php';
 
   
     use app\Controllers\TicketController;
     use app\Controllers\TableController;
     use app\Controllers\VentaController;
     use app\Controllers\PaymentMethodController;
+    use app\Controllers\IvaController;
+    use app\Controllers\ProductCategoryController;
 
     header("Content-Type: application/json");
 
@@ -194,6 +198,139 @@
     
                     break;    
                 
+                    case 'storeIva':
+
+                        $iva = new IvaController();
+        
+                        $new_iva = $iva->store($json->id, $json->tipo, $json->vigente);
+        
+                        $response = array(
+                            'status' => 'ok',
+                            'id' => $json->id,
+                            'newElement' => $new_iva
+                        );
+        
+                        echo json_encode($response);
+        
+                        break;
+                    
+                    case 'showIva':
+        
+                        $iva = new IvaController();
+                        $iva = $iva->show($json->id);
+        
+                        $response = array(
+                            'status' => 'ok',
+                            'element' => $iva,
+                        );
+        
+                        echo json_encode($response);
+        
+                        break;
+                    
+                    case 'deleteIva':
+        
+                        $iva = new IvaController();
+                        $iva->delete($json->id);
+        
+                        $response = array(
+                            'status' => 'ok',
+                            'id' => $json->id
+                        );
+        
+                        echo json_encode($response);
+        
+                        break;
+
+                        case 'storeCategoria':
+
+                            $productcategory = new ProductCategoryController();
+            
+                            $new_categoria = $productcategory->store($json->id, $json->nombre);
+            
+                            $response = array(
+                                'status' => 'ok',
+                                'id' => $json->id,
+                                'newElement' => $new_categoria
+                            );
+            
+                            echo json_encode($response);
+            
+                            break;
+                        
+                        case 'showCategoria':
+            
+                            $productcategory = new ProductCategoryController();
+                            $categoria = $productcategory->show($json->id);
+            
+                            $response = array(
+                                'status' => 'ok',
+                                'element' => $categoria,
+                            );
+            
+                            echo json_encode($response);
+            
+                            break;
+                        
+                        case 'deleteCategoria':
+            
+                            $productcategory = new ProductCategoryController();
+                            $productcategory->delete($json->id);
+            
+                            $response = array(
+                                'status' => 'ok',
+                                'id' => $json->id
+                            );
+            
+                            echo json_encode($response);
+            
+                            break;
+                            
+                            case 'storeCategoria':
+
+                                $product = new ProductController();
+                                $productcategory = new ProductCategoryController();
+                
+                                $new_product = $product->store($json->id, $json->nombre, $json->categoria);
+                
+                                $response = array(
+                                    'status' => 'ok',
+                                    'id' => $json->id,
+                                    'newElement' => $new_product
+                                );
+                
+                                echo json_encode($response);
+                
+                                break;
+                            
+                            case 'showProduct':
+                
+                                $product = new ProductController();
+                                $product = $product->show($json->id);
+                
+                                $response = array(
+                                    'status' => 'ok',
+                                    'element' => $categoria,
+                                );
+                
+                                echo json_encode($response);
+                
+                                break;
+                            
+                            case 'deleteProduct':
+                
+                                $product = new ProductController();
+                                $product->delete($json->id);
+                
+                                $response = array(
+                                    'status' => 'ok',
+                                    'id' => $json->id
+                                );
+                
+                                echo json_encode($response);
+                
+                                break;           
+                    
         }
 
     } else {

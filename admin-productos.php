@@ -1,14 +1,13 @@
 <?php
 
-	require_once 'app/Controllers/PaymentMethodController.php';
+	require_once 'app/Controllers/ProductController.php';
 
-	use app\Controllers\PaymentMethodController;
+	use app\Controllers\ProductController;
 
-	$pago = new PaymentMethodController();
-	$pagos = $pago->index();
+	$product = new ProductController();
+	$products = $product->administracion();
 	
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,13 +31,13 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center mt-3 border titular"><small class="small-admin">PANEL DE ADMINISTRACIÓN</small>MÉTODOS DE PAGO</h1>
+                <h1 class="text-center mt-3 border titular"><small class="small-admin">PANEL DE ADMINISTRACIÓN</small>PRODUCTOS</h1>
             </div>
             <div class="col-12 mt-5">
                 <section>
                     <div class="row">
                         <div class="col d-flex justify-content-end">
-                            <button type="button" class="create-form-button btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addArticle">+ Añadir método de pago</button>
+                            <button type="button" class="create-form-button btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addArticle">+ Añadir producto</button>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -46,30 +45,51 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Forma de pago</th>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Categoría</th>
+                                    <th scope="col">Visible</th>
+                                    <th scope="col">Precio base</th>
+                                    <th scope="col">IVA</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($pagos as $pago): ?>
-                                        <tr class="table-element" data-element="<?= $pago['id'] ?>">
+                                    <?php foreach($products as $product): ?>
+                                        <tr class="table-element" data-element="<?= $product['id'] ?>">
                                             <th scope="row" class="nombre">
-                                                <?= $pago['nombre'] ?>
+                                                <?= $product['nombre'] ?>
                                             </th>
+                                            <td class="categoria">
+                                                <?= $product['categoria'] ?>
+                                            </td>
+                                            <td class="visible">
+                                                <?= $product['visible'] ?>
+                                            </td>
+                                            <td class="base">
+                                                <?= $product['base'] ?>
+                                            </td>
+                                            <td class="iva">
+                                                <?= $product['iva'] ?>
+                                            </td>
+                                            <!-- Ruta para mostrar y modificar un registro -->
                                             <td class="opciones">
-                                                <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="<?= $pago['id'] ?>" data-route="showPaymentMethod" data-bs-target="#addArticle">
+                                                <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="<?= $product['id'] ?>" data-route="showProduct" data-bs-target="#addArticle">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" class="delete-table-button btn btn-danger" data-id="<?= $pago['id'] ?>" data-bs-toggle="modal" data-bs-target="#deleteArticle">
+                                                <button type="button" class="delete-table-button btn btn-danger" data-id="<?= $product['id'] ?>" data-bs-toggle="modal" data-bs-target="#deleteArticle">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
-                                    
+                                    <!-- Este dato es invisible mediante d-none. Cada cajita tiene la misma clase que los inputs de la tabla. Clona en admin-form... Mientras exista la plantilla que tenga las mismas clases, se aplicarán los datos-->
                                     <tr class="create-layout table-element d-none" data-element="">
                                         <th scope="row" class="nombre"></th>
+                                        <td class="categoria"></td>
+                                        <td class="visible"></td>
+                                        <td class="base"></td>
+                                        <td class="iva"></td>
                                         <td class="opciones">
-                                            <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="" data-route="showPaymentMethod" data-bs-target="#addArticle">
+                                            <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="" data-route="showProduct" data-bs-target="#addArticle">
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                             <button type="button" class="delete-table-button btn btn-danger" data-id="" data-bs-toggle="modal" data-bs-target="#deleteArticle">
@@ -113,16 +133,49 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addArticleLabel">AÑADIR MÉTODO DE PAGO</h5>
+                    <h5 class="modal-title" id="addArticleLabel">AÑADIR PRODUCTO</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    
-                    <form class="admin-form" data-route="storePaymentMethod">
+                    <!-- Ruta para crear registro nuevo. Se dirige a su caso de web.php -->
+                    <form class="admin-form" data-route="storeProduct">
                         <input type="hidden" name="id" value="">
                         <div class="mb-3">
-                            <label for="nombre" class="form-label">Método de pago</label>
+                            <label for="nombre" class="form-label">Nombre del producto</label>
                             <input type="text" class="form-control" name="nombre" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Categoría</label>
+                            <select class="form-select" aria-label="Default select example" name="categoria">
+                                <option selected>Selecciona categoría</option>
+                                <option value="1">Refrescos</option>
+                                <option value="2">Bebidas alcohólicas</option>
+                                <option value="3">Bebidas calientes</option>
+                                <option value="4">Aperitivos</option>
+                                <option value="5">Tapas</option>
+                                <option value="6">Carnes</option>
+                                <option value="7">Pescados</option>
+                                <option value="8">Postres</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="vigente" class="form-label">Visible</label>
+                            <select class="form-select" aria-label="Default select example" name="vigente">
+                                <option selected value="1">Sí</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="base" class="form-label">Precio base</label>
+                            <input type="number" class="form-control" name="base" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="iva" class="form-label"></label>
+                            <select class="form-select" aria-label="Default select example" name="iva">
+                                <option selected>Selecciona el IVA</option>
+                                <option value="1">10%</option>
+                                <option value="2">21%</option>
+                            </select>
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-secondary mt-3 me-2" data-bs-dismiss="modal">CERRAR</button>
@@ -140,16 +193,16 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteArticleLabel">ELIMINAR FORMA DE PAGO</h5>
+                    <h5 class="modal-title" id="deleteArticleLabel">ELIMINAR PRODUCTO</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-center text-muted">Está a punto de borrar un método de pago. ¿Está completamente seguro de realizar esta acción?</p>
+                    <p class="text-center text-muted">Está a punto de borrar un producto. ¿Está completamente seguro de realizar esta acción?</p>
                 </div>
-               
+                <!-- Ruta para eliminar un registro -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                    <button type="button" class="delete-table-modal btn btn-primary" data-bs-dismiss="modal" data-route="deletePaymentMethod">ELIMINAR</button>
+                    <button type="button" class="delete-table-modal btn btn-primary" data-bs-dismiss="modal" data-route="deleteProduct">ELIMINAR</button>
                 </div>
             </div>
         </div>

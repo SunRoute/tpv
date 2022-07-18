@@ -19,6 +19,18 @@
 			return $this->productcategory->index();
 		
 		}
+
+		public function store($id, $nombre){
+			return $this->productcategory->store($id, $nombre);
+		}
+
+		public function show($categoria){
+			return $this->productcategory->show($categoria);
+		}
+
+		public function delete($id){
+			return $this->productcategory->delete($id);
+		}
 	}
 
 ?>

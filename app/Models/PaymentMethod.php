@@ -24,7 +24,7 @@
 
             $query = "SELECT id AS pago_id, nombre AS forma_pago
             FROM metodos_pagos
-            WHERE metodos_pagos.id";
+            WHERE metodos_pagos.id AND activo = 1";
 
             $stmt = $this->pdo->prepare($query);
             $result = $stmt->execute();
