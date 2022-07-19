@@ -18,12 +18,17 @@
 		public function index($category){
 			return $this->product->index($category);
 		}
+		
 		public function categoria($category){
 			return $this->product->categoria($category);
 		}
+
+		public function administracionProductos(){
+			return $this->product->administracionProductos();
+		}
 		
-		public function store($id, $nombre){
-			return $this->product->store($id, $nombre);
+		public function store($id, $nombre, $categoria, $visible, $iva, $base){
+			return $this->product->store($id, $nombre, $categoria, $visible, $iva, $base);
 		}
 
 		public function show($product){
@@ -34,9 +39,7 @@
 			return $this->product->delete($id);
 		}
 
-		public function administracion($id){
-			return $this->product->administracion($id);
-		}
+		
 	}	
 
 ?>

@@ -16,7 +16,7 @@ export let renderProducts = () => {
                 // se abre json
                 let data = {};
                 // se le da clave y valor
-                data["route"] = 'addProduct';
+                data["route"] = 'addTicketProduct';
                 // se captura el dato del elemento html
                 data["price_id"] = addProduct.dataset.price;
                 data["table_id"] = addProduct.dataset.table;

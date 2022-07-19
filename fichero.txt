@@ -1,5 +1,6 @@
-SELECT
-                ventas.id AS id, ventas.numero_ticket AS ticket, ventas.hora_emision AS hora, mesas.numero AS mesa, ventas.precio_total AS total
-                FROM ventas
-                INNER JOIN mesas ON ventas.mesa_id = mesas.id
-                WHERE ventas.fecha_emision = '2022-07-13'
+SELECT productos.id AS id, productos.nombre AS nombre, productos.imagen_url AS imagen, productos.visible AS visible, productos_categorias.id AS categoria, precios.precio_base AS base, iva.id AS iva
+        FROM productos
+        INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
+        INNER JOIN precios ON precios.producto_id = productos.id
+        INNER JOIN iva ON precios.iva_id = iva.id
+        WHERE productos.activo = 1 AND productos.id = 1

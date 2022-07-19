@@ -20,6 +20,11 @@
 		
 		}
 
+		public function administracionCategorias(){
+			return $this->productcategory->administracionCategorias();
+		
+		}
+
 		public function store($id, $nombre){
 			return $this->productcategory->store($id, $nombre);
 		}

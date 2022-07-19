@@ -20,7 +20,7 @@ export let renderTickets= () => {
                 // se abre json
                 let data = {};
                 // se le da clave y valor
-                data["route"] = 'deleteProduct';
+                data["route"] = 'deleteTicketProduct';
                 // se captura el dato del elemento html
                 data["ticket_id"] = deleteProduct.dataset.ticket;
                 data["table_id"] = deleteProduct.dataset.table;
@@ -78,7 +78,7 @@ export let renderTickets= () => {
                 // se abre json
                 let data = {};
                 // se le da clave y valor
-                data["route"] = 'deleteAll';
+                data["route"] = 'deleteAllTicketProducts';
                 // se captura el dato del elemento html
                 data["table_id"] = deleteAll.dataset.table;
                 

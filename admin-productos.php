@@ -1,11 +1,20 @@
 <?php
 
 	require_once 'app/Controllers/ProductController.php';
+    require_once 'app/Controllers/ProductCategoryController.php';
+    require_once 'app/Controllers/IvaController.php';
 
-	use app\Controllers\ProductController;
+    use app\Controllers\ProductController;
+    use app\Controllers\ProductCategoryController;
+    use app\Controllers\IvaController;
 
 	$product = new ProductController();
-	$products = $product->administracion();
+    $categoria = new ProductCategoryController();
+    $iva = new IvaController();
+
+	$products = $product->administracionProductos();
+    $categorias = $categoria->administracionCategorias();
+    $ivas = $iva->index();
 	
 ?>
 
@@ -45,30 +54,34 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
+                                    <th scope="col">Imagen</th>    
                                     <th scope="col">Producto</th>
                                     <th scope="col">Categoría</th>
                                     <th scope="col">Visible</th>
-                                    <th scope="col">Precio base</th>
                                     <th scope="col">IVA</th>
+                                    <th scope="col">Precio base</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($products as $product): ?>
                                         <tr class="table-element" data-element="<?= $product['id'] ?>">
-                                            <th scope="row" class="nombre">
-                                                <?= $product['nombre'] ?>
+                                            <th scope="row" class="imagen">
+                                                <img style="width:5rem;" src="<?= $product['imagen'] ?>" alt="">
                                             </th>
+                                            <td class="nombre">
+                                                <?= $product['nombre'] ?>
+                                            </td>
                                             <td class="categoria">
                                                 <?= $product['categoria'] ?>
                                             </td>
                                             <td class="visible">
                                                 <?= $product['visible'] ?>
                                             </td>
-                                            <td class="base">
-                                                <?= $product['base'] ?>
-                                            </td>
                                             <td class="iva">
                                                 <?= $product['iva'] ?>
+                                            </td>
+                                            <td class="base">
+                                                <?= $product['base'] ?>
                                             </td>
                                             <!-- Ruta para mostrar y modificar un registro -->
                                             <td class="opciones">
@@ -83,11 +96,12 @@
                                     <?php endforeach; ?>
                                     <!-- Este dato es invisible mediante d-none. Cada cajita tiene la misma clase que los inputs de la tabla. Clona en admin-form... Mientras exista la plantilla que tenga las mismas clases, se aplicarán los datos-->
                                     <tr class="create-layout table-element d-none" data-element="">
-                                        <th scope="row" class="nombre"></th>
+                                        <th scope="row" class="imagen"></th>
+                                        <td class="nombre"></td>
                                         <td class="categoria"></td>
                                         <td class="visible"></td>
-                                        <td class="base"></td>
                                         <td class="iva"></td>
+                                        <td class="base"></td>
                                         <td class="opciones">
                                             <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="" data-route="showProduct" data-bs-target="#addArticle">
                                                 <i class="fa fa-edit"></i>
@@ -141,6 +155,10 @@
                     <form class="admin-form" data-route="storeProduct">
                         <input type="hidden" name="id" value="">
                         <div class="mb-3">
+                            <label for="imagen" class="form-label">Imagen del producto</label>
+                            <input type="text" class="form-control" name="imagen" value="">
+                        </div>
+                        <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre del producto</label>
                             <input type="text" class="form-control" name="nombre" value="">
                         </div>
@@ -148,34 +166,32 @@
                             <label for="categoria" class="form-label">Categoría</label>
                             <select class="form-select" aria-label="Default select example" name="categoria">
                                 <option selected>Selecciona categoría</option>
-                                <option value="1">Refrescos</option>
-                                <option value="2">Bebidas alcohólicas</option>
-                                <option value="3">Bebidas calientes</option>
-                                <option value="4">Aperitivos</option>
-                                <option value="5">Tapas</option>
-                                <option value="6">Carnes</option>
-                                <option value="7">Pescados</option>
-                                <option value="8">Postres</option>
+                                <?php foreach($categorias as $categoria):?>
+                                    <option value="<?= $categoria['id']; ?>"
+                                    <?= $categoria['nombre'] == $categoria ? 'selected':'' ?>><?= $categoria['nombre']; ?></option>
+                                <?php endforeach;?>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="vigente" class="form-label">Visible</label>
-                            <select class="form-select" aria-label="Default select example" name="vigente">
+                            <label for="visible" class="form-label">Visible</label>
+                            <select class="form-select" aria-label="Default select example" name="visible">
                                 <option selected value="1">Sí</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="base" class="form-label">Precio base</label>
-                            <input type="number" class="form-control" name="base" value="">
-                        </div>
-                        <div class="mb-3">
                             <label for="iva" class="form-label"></label>
                             <select class="form-select" aria-label="Default select example" name="iva">
                                 <option selected>Selecciona el IVA</option>
-                                <option value="1">10%</option>
-                                <option value="2">21%</option>
+                                <?php foreach($ivas as $iva):?>
+                                    <option value="<?= $iva['id']; ?>"
+                                    <?= $iva['tipo'] == $iva ? 'selected':'' ?>><?= $iva['tipo']; ?></option>
+                                <?php endforeach;?>   
                             </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="base" class="form-label">Precio base</label>
+                            <input type="number" class="form-control" name="base" value="">
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-secondary mt-3 me-2" data-bs-dismiss="modal">CERRAR</button>

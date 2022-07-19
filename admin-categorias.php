@@ -51,9 +51,12 @@
                                 <tbody>
                                     <?php foreach($categorias as $categoria): ?>
                                         <tr class="table-element" data-element="<?= $categoria['id'] ?>">
-                                            <th scope="row" class="nombre">
-                                                <?= $categoria['nombre'] ?>
+                                            <th scope="row" class="imagen_url">
+                                              <img style="width:5rem;"src="<?= $categoria['imagen_url'] ?>" alt="">  
                                             </th>
+                                            <td class="nombre">
+                                                <?= $categoria['nombre'] ?>
+                                            </td>
                                             <td class="opciones">
                                                 <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="<?= $pago['id'] ?>" data-route="showCategoria" data-bs-target="#addArticle">
                                                     <i class="fa fa-edit"></i>
@@ -66,7 +69,8 @@
                                     <?php endforeach; ?>
                                     
                                     <tr class="create-layout table-element d-none" data-element="">
-                                        <th scope="row" class="nombre"></th>
+                                        <th scope="row" class="imagen_url"></th>
+                                        <td class="nombre"></td>
                                         <td class="opciones">
                                             <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="" data-route="showCategoria" data-bs-target="#addArticle">
                                                 <i class="fa fa-edit"></i>
@@ -120,7 +124,11 @@
                     <form class="admin-form" data-route="storeCategoria">
                         <input type="hidden" name="id" value="">
                         <div class="mb-3">
-                            <label for="nombre" class="form-label">Categoría</label>
+                            <label for="imagen_url" class="form-label">Imagen de la categoría</label>
+                            <input type="text" class="form-control" name="imagen_url" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre de la categoría</label>
                             <input type="text" class="form-control" name="nombre" value="">
                         </div>
                         <div class="d-flex justify-content-end">
