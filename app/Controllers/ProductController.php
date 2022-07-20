@@ -27,8 +27,8 @@
 			return $this->product->administracionProductos();
 		}
 		
-		public function store($id, $nombre, $categoria, $visible, $iva, $base){
-			return $this->product->store($id, $nombre, $categoria, $visible, $iva, $base);
+		public function store($id, $nombre, $categoria, $visible, $imagen_url){
+			return $this->product->store($id, $nombre, $categoria, $visible, $imagen_url);
 		}
 
 		public function show($product){

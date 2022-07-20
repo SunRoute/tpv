@@ -45,15 +45,17 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
+                                        <th scope="col">Imagen</th>
                                         <th scope="col">Categoría</th>
+                                        <th scope="col">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($categorias as $categoria): ?>
                                         <tr class="table-element" data-element="<?= $categoria['id'] ?>">
-                                            <th scope="row" class="imagen_url">
-                                              <img style="width:5rem;"src="<?= $categoria['imagen_url'] ?>" alt="">  
-                                            </th>
+                                            <td>
+                                                <img class="imagen_url" src="<?= $categoria['imagen_url'] ?>" alt="">
+                                            </td>
                                             <td class="nombre">
                                                 <?= $categoria['nombre'] ?>
                                             </td>
@@ -69,7 +71,7 @@
                                     <?php endforeach; ?>
                                     
                                     <tr class="create-layout table-element d-none" data-element="">
-                                        <th scope="row" class="imagen_url"></th>
+                                        <td><img class="imagen_url" src=""></td>
                                         <td class="nombre"></td>
                                         <td class="opciones">
                                             <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="" data-route="showCategoria" data-bs-target="#addArticle">
@@ -124,8 +126,8 @@
                     <form class="admin-form" data-route="storeCategoria">
                         <input type="hidden" name="id" value="">
                         <div class="mb-3">
-                            <label for="imagen_url" class="form-label">Imagen de la categoría</label>
-                            <input type="text" class="form-control" name="imagen_url" value="">
+                            <label for="imagen" class="form-label">Imagen de la categoría</label>
+                            <input type="file" class="form-control" name="imagen_url" value="">
                         </div>
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre de la categoría</label>

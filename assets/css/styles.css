@@ -189,6 +189,10 @@ body {
   text-align: center;
 }
 
+.table tr td img{
+  width: 5rem;
+}
+
 
 /* PENDIENTE COMPROBAR QUE ESTÁ TODO BIEN ANTES DE BORRAR */
 

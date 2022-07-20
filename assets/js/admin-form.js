@@ -30,7 +30,27 @@ export let renderAdminForm = () => {
 
                 // ...y hay que convertirlos a json.
                 formData.forEach(function(value, key){
-                    data[key] = value;
+
+                    if(value instanceof File && value.size > 0) {
+
+                        let file = {
+                            'lastMod'    : value.lastModified,
+                            'lastModDate': value.lastModifiedDate,
+                            'name'       : value.name,
+                            'size'       : value.size,
+                            'type'       : value.type,
+                        } 
+
+                        data[key] = file;
+
+                        fetch ('upload.php', {
+                            method: 'POST',
+                            body: formData
+                        });
+                    }
+                    else {
+                        data[key] = value;
+                    }
                 });
 
                 let response = await fetch('web.php', {
@@ -61,7 +81,13 @@ export let renderAdminForm = () => {
                         // El último registro añadido en la tabla. Todos los campos son recogidos y dentro del elemento clonado busca los datos y les enchufa el valor
                         Object.entries(json.newElement).forEach(([key, value]) => {
                             if(newElement.querySelector("." + key)){
-                                newElement.querySelector("." + key).innerHTML = value;
+
+                                if(newElement.querySelector("." + key).tagName == "IMG") {
+
+                                    newElement.querySelector("." + key).src = value;
+                                }else{
+                                    newElement.querySelector("." + key).innerHTML = value;
+                                }
                             }
                         });
                         // Y finalmente se añade el registro a continuación del último. tableContainer es el contenedor de la tabla (tbody)
@@ -79,7 +105,13 @@ export let renderAdminForm = () => {
                         Object.entries(json.newElement).forEach(([key, value]) => {
 
                             if(element.querySelector("." + key)){
-                                element.querySelector("." + key).innerHTML = value;
+
+                                if(element.querySelector("." + key).tagName == "IMG") {
+
+                                    element.querySelector("." + key).src = value;
+                                }else{
+                                    element.querySelector("." + key).innerHTML = value;
+                                }
                             }
                         });
 

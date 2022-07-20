@@ -7,6 +7,8 @@
     require_once 'app/Controllers/IvaController.php';
     require_once 'app/Controllers/ProductCategoryController.php';
     require_once 'app/Controllers/ProductController.php';
+    require_once 'app/Controllers/PrecioController.php';
+
   
     use app\Controllers\TicketController;
     use app\Controllers\TableController;
@@ -15,6 +17,7 @@
     use app\Controllers\IvaController;
     use app\Controllers\ProductCategoryController;
     use app\Controllers\ProductController;
+    use app\Controllers\PrecioController;
 
     header("Content-Type: application/json");
 
@@ -247,7 +250,14 @@
 
                 $productcategory = new ProductCategoryController();
 
-                $new_categoria = $productcategory->store($json->id, $json->nombre);
+                if(isset($json->imagen_url->name)){
+                    $imagen_url = "/upload/category/".$json->imagen_url->name;            
+                }else{
+                    $imagen_url = null;
+                }
+
+
+                $new_categoria = $productcategory->store($json->id, $json->nombre, $imagen_url);
 
                 $response = array(
                     'status' => 'ok',
@@ -290,10 +300,17 @@
             case 'storeProduct':
 
                 $product = new ProductController();
+                $precio = new PrecioController();
 
-                $new_product_id = $product->store($json->id, $json->nombre, $json->categoria, $json->visible);
+                if(isset($json->imagen_url->name)){
+                    $imagen_url = "/upload/product/".$json->imagen_url->name;               
+                }else{
+                    $imagen_url = null;
+                }
 
-                $price->store($new_product_id, $json->iva, $json->base)
+                $new_product_id = $product->store($json->id, $json->nombre, $json->categoria_id, $json->visible, $imagen_url);
+                $precio->store($new_product_id, $json->iva_id, $json->base);
+                $new_product = $product->show($new_product_id);
 
                 $response = array(
                     'status' => 'ok',
@@ -323,7 +340,11 @@
             case 'deleteProduct':
 
                 $product = new ProductController();
+                $precio = new PrecioController();
+
                 $product->delete($json->id);
+
+                $precio->delete($id);
 
                 $response = array(
                     'status' => 'ok',

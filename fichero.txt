@@ -1,6 +1,2 @@
-SELECT productos.id AS id, productos.nombre AS nombre, productos.imagen_url AS imagen, productos.visible AS visible, productos_categorias.id AS categoria, precios.precio_base AS base, iva.id AS iva
-        FROM productos
-        INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
-        INNER JOIN precios ON precios.producto_id = productos.id
-        INNER JOIN iva ON precios.iva_id = iva.id
-        WHERE productos.activo = 1 AND productos.id = 1
+SELECT * FROM precios
+        WHERE producto_id = 11 AND vigente=1 AND (iva_id = 1 AND precio_base = 16)

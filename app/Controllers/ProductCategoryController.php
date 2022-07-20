@@ -25,8 +25,8 @@
 		
 		}
 
-		public function store($id, $nombre){
-			return $this->productcategory->store($id, $nombre);
+		public function store($id, $nombre, $imagen_url ){
+			return $this->productcategory->store($id, $nombre, $imagen_url );
 		}
 
 		public function show($categoria){

@@ -16,12 +16,19 @@
             
 		}
 
-        public function store(){
-			return $this->precio->store();
-		}
+        public function store($new_product_id, $iva, $base){
 
-        public function delete(){
-			return $this->precio->delete();
+			$resultado = $this->precio->filtrarPrecios($new_product_id, $iva, $base);
+
+			if(empty($resultado)){
+
+				return $this->precio->store($new_product_id, $iva, $base);
+			
+			}
+		}
+		
+        public function delete($id){
+			return $this->precio->delete($id);
 		}
 
     }

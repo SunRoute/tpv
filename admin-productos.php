@@ -60,14 +60,15 @@
                                     <th scope="col">Visible</th>
                                     <th scope="col">IVA</th>
                                     <th scope="col">Precio base</th>
+                                    <th scope="col">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach($products as $product): ?>
                                         <tr class="table-element" data-element="<?= $product['id'] ?>">
-                                            <th scope="row" class="imagen">
-                                                <img style="width:5rem;" src="<?= $product['imagen'] ?>" alt="">
-                                            </th>
+                                            <td>
+                                                <img class="imagen_url" src="<?= $product['imagen_url'] ?>" alt="">
+                                            </td>
                                             <td class="nombre">
                                                 <?= $product['nombre'] ?>
                                             </td>
@@ -96,7 +97,7 @@
                                     <?php endforeach; ?>
                                     <!-- Este dato es invisible mediante d-none. Cada cajita tiene la misma clase que los inputs de la tabla. Clona en admin-form... Mientras exista la plantilla que tenga las mismas clases, se aplicarán los datos-->
                                     <tr class="create-layout table-element d-none" data-element="">
-                                        <th scope="row" class="imagen"></th>
+                                        <td><img class="imagen_url" src=""></td>
                                         <td class="nombre"></td>
                                         <td class="categoria"></td>
                                         <td class="visible"></td>
@@ -156,7 +157,7 @@
                         <input type="hidden" name="id" value="">
                         <div class="mb-3">
                             <label for="imagen" class="form-label">Imagen del producto</label>
-                            <input type="text" class="form-control" name="imagen" value="">
+                            <input type="file" class="form-control" name="imagen_url" value="">
                         </div>
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre del producto</label>
@@ -164,7 +165,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoría</label>
-                            <select class="form-select" aria-label="Default select example" name="categoria">
+                            <select class="form-select" aria-label="Default select example" name="categoria_id">
                                 <option selected>Selecciona categoría</option>
                                 <?php foreach($categorias as $categoria):?>
                                     <option value="<?= $categoria['id']; ?>"
@@ -181,7 +182,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="iva" class="form-label"></label>
-                            <select class="form-select" aria-label="Default select example" name="iva">
+                            <select class="form-select" aria-label="Default select example" name="iva_id">
                                 <option selected>Selecciona el IVA</option>
                                 <?php foreach($ivas as $iva):?>
                                     <option value="<?= $iva['id']; ?>"

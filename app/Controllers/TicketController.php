@@ -35,10 +35,6 @@
 			return $this->ticket->deleteAll($table_id);
 		}
 
-		// public function formaPago(){
-		// 	return $this->ticket->formaPago();
-		// }
-
 		public function ultimoTicketCreado($venta_id){
 			return $this->ticket->ultimoTicketCreado($venta_id);
 		}
