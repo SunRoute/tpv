@@ -51,7 +51,7 @@
         public function show($iva){
 
             $query = "SELECT * FROM iva
-            WHERE id = $iva";
+            WHERE id = $iva AND vigente = 1";
 
             $stmt = $this->pdo->prepare($query);
             $result = $stmt->execute();

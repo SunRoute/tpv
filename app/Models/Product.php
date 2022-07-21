@@ -9,7 +9,23 @@ use core\Connection;
 
 class Product extends Connection {
 
-	public function index($category){
+    public function index(){
+
+        $query = "SELECT productos.id AS id, productos.nombre AS nombre, productos.imagen_url AS imagen_url, productos.visible AS visible, productos_categorias.nombre AS categoria, precios.precio_base AS base, iva.tipo AS iva
+        FROM productos
+        INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
+        INNER JOIN precios ON precios.producto_id = productos.id
+        INNER JOIN iva ON precios.iva_id = iva.id
+        WHERE productos.activo = 1";
+
+        $stmt = $this->pdo->prepare($query);
+        $result = $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
+	public function indexPorCategoria($category){
 
         $query = "SELECT productos.nombre, productos.imagen_url, precios.id AS precio_id
         FROM productos
@@ -34,22 +50,6 @@ class Product extends Connection {
         $result = $stmt->execute();
 
         return $stmt->fetch(PDO::FETCH_ASSOC);
-
-    }
-
-    public function administracionProductos(){
-
-        $query = "SELECT productos.id AS id, productos.nombre AS nombre, productos.imagen_url AS imagen_url, productos.visible AS visible, productos_categorias.nombre AS categoria, precios.precio_base AS base, iva.tipo AS iva
-        FROM productos
-        INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
-        INNER JOIN precios ON precios.producto_id = productos.id
-        INNER JOIN iva ON precios.iva_id = iva.id
-        WHERE productos.activo = 1";
-
-        $stmt = $this->pdo->prepare($query);
-        $result = $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     }
 

@@ -9,7 +9,19 @@ use core\Connection;
 
 class ProductCategory extends Connection {
 
-	public function index(){
+    public function index(){
+
+        $query = "SELECT productos_categorias.id, productos_categorias.nombre, productos_categorias.imagen_url
+        FROM productos_categorias
+        WHERE activo = 1";
+
+        $stmt = $this->pdo->prepare($query);
+        $result = $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function indexFiltrado(){
 
         $query = "SELECT productos_categorias.id AS id, productos_categorias.nombre AS nombre, productos_categorias.imagen_url AS imagen_url
         FROM productos_categorias
@@ -22,17 +34,6 @@ class ProductCategory extends Connection {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function administracionCategorias(){
-
-        $query = "SELECT productos_categorias.id, productos_categorias.nombre, productos_categorias.imagen_url
-        FROM productos_categorias
-        WHERE activo = 1";
-
-        $stmt = $this->pdo->prepare($query);
-        $result = $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
 
     public function store($id, $nombre, $imagen_url ){
             

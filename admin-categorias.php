@@ -60,7 +60,7 @@
                                                 <?= $categoria['nombre'] ?>
                                             </td>
                                             <td class="opciones">
-                                                <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="<?= $pago['id'] ?>" data-route="showCategoria" data-bs-target="#addArticle">
+                                                <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="<?= $categoria['id'] ?>" data-route="showCategoria" data-bs-target="#addArticle">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
                                                 <button type="button" class="delete-table-button btn btn-danger" data-id="<?= $categoria['id'] ?>" data-bs-toggle="modal" data-bs-target="#deleteArticle">
@@ -118,7 +118,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addArticleLabel">AÑADIR CATEGORÍA</h5>
+                    <h5 class="modal-title" id="addArticleLabel">ADMINISTRACIÓN CATEGORÍAS</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

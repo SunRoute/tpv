@@ -47,6 +47,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Forma de pago</th>
+                                        <th scope="col">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -113,7 +114,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addArticleLabel">AÑADIR MÉTODO DE PAGO</h5>
+                    <h5 class="modal-title" id="addArticleLabel">ADMINISTRACIÓN MÉTODOS DE PAGO</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -140,7 +141,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteArticleLabel">ELIMINAR FORMA DE PAGO</h5>
+                    <h5 class="modal-title" id="deleteArticleLabel">ELIMINAR MÉTODO DE PAGO</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

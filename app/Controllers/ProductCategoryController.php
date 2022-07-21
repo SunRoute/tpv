@@ -20,8 +20,8 @@
 		
 		}
 
-		public function administracionCategorias(){
-			return $this->productcategory->administracionCategorias();
+		public function indexFiltrado(){
+			return $this->productcategory->indexFiltrado();
 		
 		}
 

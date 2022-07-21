@@ -5,7 +5,7 @@
     use app\Controllers\ProductCategoryController;
 
     $categoria = new ProductCategoryController();
-    $categorias = $categoria->index();
+    $categorias = $categoria->indexFiltrado();
 
 ?>
 
