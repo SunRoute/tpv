@@ -68,6 +68,19 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
+
+        public function addFakeProduct($price_id, $table_id, $timestamp){
+
+            $query = "INSERT INTO tickets (precio_id, mesa_id, activo, creado, actualizado) VALUES (". $price_id.", ".$table_id.", 1, '$timestamp', '$timestamp')";
+
+            file_put_contents("fichero.txt", $query);
+
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+        }
+
+
         public function deleteProduct($ticket_id){
 
             $query =  "UPDATE tickets SET activo= 0, actualizado = NOW() WHERE id = $ticket_id";
@@ -110,6 +123,20 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
 
         }
+
+        public function ventaFakeCerrada($table_id, $venta_id, $timestamp){
+
+            $query = "UPDATE tickets SET venta_id = $venta_id, actualizado = '$timestamp'
+            WHERE mesa_id = $table_id AND venta_id IS NULL AND activo = 1";
+           
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+
+        }
+        
         
     }
 

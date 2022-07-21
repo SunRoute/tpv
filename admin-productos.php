@@ -79,7 +79,7 @@
                                                 <?= $product['visible'] ?>
                                             </td>
                                             <td class="iva">
-                                                <?= $product['iva'] ?>
+                                                <?= $product['iva'] ?>%
                                             </td>
                                             <td class="base">
                                                 <?= $product['base'] ?>
@@ -181,12 +181,12 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="iva" class="form-label"></label>
+                            <label for="iva" class="form-label">IVA</label>
                             <select class="form-select" aria-label="Default select example" name="iva_id">
                                 <option selected>Selecciona el IVA</option>
                                 <?php foreach($ivas as $iva):?>
                                     <option value="<?= $iva['id']; ?>"
-                                    <?= $iva['tipo'] == $iva ? 'selected':'' ?>><?= $iva['tipo']; ?></option>
+                                    <?= $iva['tipo'] == $iva ? 'selected':'' ?>><?= $iva['tipo']; ?>%</option>
                                 <?php endforeach;?>   
                             </select>
                         </div>

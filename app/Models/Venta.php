@@ -112,10 +112,31 @@
             return $id;
         }
 
+        public function fakeCobrar($numero_ticket, $base, $iva, $precio_total, $pago, $table_id, $date, $time, $timestamp){
+
+            $query = "INSERT INTO ventas (numero_ticket, precio_total_base, precio_total_iva, precio_total, metodo_pago_id, mesa_id, fecha_emision, hora_emision, activo, creado, actualizado) VALUES (".$numero_ticket.", ".$base.", ".$iva.", ".$precio_total.", ".$pago.", ".$table_id.", '$date', '$time', 1, '$timestamp', '$timestamp')";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+
+            $id = $this->pdo->lastInsertId();
+            
+            return $id;
+        }
 
         public function ocupacion($venta_id, $creacion_ticket){
 
             $query = "UPDATE ventas SET duracion_servicio = TIMESTAMPDIFF(MINUTE,'$creacion_ticket', NOW())
+            WHERE ventas.id = $venta_id";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+    
+        }
+
+        public function fakeOcupacion($venta_id, $creacion_ticket, $timestamp){
+
+            $query = "UPDATE ventas SET duracion_servicio = TIMESTAMPDIFF(MINUTE,'$creacion_ticket', '$timestamp')
             WHERE ventas.id = $venta_id";
 
             $stmt = $this->pdo->prepare($query);

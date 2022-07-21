@@ -1,2 +1,1 @@
-SELECT * FROM precios
-        WHERE producto_id = 11 AND vigente=1 AND (iva_id = 1 AND precio_base = 16)
+INSERT INTO tickets (precio_id, mesa_id, activo, creado, actualizado) VALUES (14, 7, 1, '2021-10-18 14:26:00', '2021-10-18 14:26:00')

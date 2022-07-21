@@ -11,7 +11,7 @@ class Product extends Connection {
 
     public function index(){
 
-        $query = "SELECT productos.id AS id, productos.nombre AS nombre, productos.imagen_url AS imagen_url, productos.visible AS visible, productos_categorias.nombre AS categoria, precios.precio_base AS base, iva.tipo AS iva
+        $query = "SELECT productos.id AS id, productos.nombre AS nombre, productos.imagen_url AS imagen_url, productos.visible AS visible, productos_categorias.nombre AS categoria, precios.precio_base AS base, iva.tipo AS iva, precios.id AS precio_id
         FROM productos
         INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
         INNER JOIN precios ON precios.producto_id = productos.id

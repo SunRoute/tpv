@@ -56,7 +56,7 @@
                                     <?php foreach($ivas as $iva): ?>
                                         <tr class="table-element" data-element="<?= $iva['id'] ?>">
                                             <th scope="row" class="tipo">
-                                                <?= $iva['tipo'] ?>
+                                                <?= $iva['tipo'] ?>%
                                             </th>
                                             <td class="vigente">
                                                 <?= $iva['vigente'] ?>
