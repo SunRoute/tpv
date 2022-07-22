@@ -24,12 +24,6 @@ class Connection{
         $this->password = $configuration['password'];
         
         try {
-
-            // $this->pdo = new PDO($this->driver .':host='.$this->host.';dbname='.$this->database, $this->user, $this->password, 
-            //     array(
-            //         PDO::MYSQL_ATTR_LOCAL_INFILE => TRUE
-            //     )
-            // );
             
             $this->pdo = new PDO($this->driver .':host='.$this->host.';dbname='.$this->database, $this->user, $this->password,
                 array(

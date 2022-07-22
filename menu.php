@@ -29,7 +29,7 @@
 			</a>
 		</div>
 		<div class="col-12 gy-4">
-			<a class="btn btn-warning g-4 w-100 py-1 px-2 shadow-sm option-system option-system-menu rounded-0" role="button" href="">
+			<a class="btn btn-warning g-4 w-100 py-1 px-2 shadow-sm option-system option-system-menu rounded-0" role="button" href="graficos.php?panel=1">
 				<h2 class="mb-0"><i class="fa fa-line-chart" aria-hidden="true"></i> Estadísticas</h2>
 			</a>
 		</div>
@@ -66,7 +66,7 @@
 						</ul>
 					</li>
 					<li class="nav-item dropdown mt-2">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<a class="nav-link dropdown-toggle" href="graficos.php?panel=2" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						ESTADISTICAS
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown2">

@@ -136,10 +136,53 @@
             return $stmt->fetch(PDO::FETCH_ASSOC);
 
         }
+
+        public function getChartData($chart_data){
+
+            switch($chart_data) {
+                
+                case 'best_dishes':
+
+                    $query="SELECT productos.nombre AS labels, COUNT(tickets.precio_id) AS data
+                    FROM tickets
+                    INNER JOIN precios ON tickets.precio_id = precios.id
+                    INNER JOIN productos ON precios.producto_id = productos.id
+                    INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
+                    WHERE productos_categorias.nombre NOT IN ('Refrescos', 'Bebidas alcohólicas', 'Bebidas calientes') GROUP BY productos.nombre ORDER BY COUNT(tickets.precio_id) DESC";
+    
+                    break;
+
+                case 'best_drinks':
+
+                    $query="SELECT productos.nombre AS labels, COUNT(tickets.precio_id) AS data
+                    FROM tickets
+                    INNER JOIN precios ON tickets.precio_id = precios.id
+                    INNER JOIN productos ON precios.producto_id = productos.id
+                    INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
+                    WHERE productos_categorias.nombre IN ('Refrescos', 'Bebidas alcohólicas', 'Bebidas calientes') GROUP BY productos.nombre ORDER BY COUNT(tickets.precio_id) DESC";
+    
+                    break;
+
+                case 'best_categories':
+
+                    $query="SELECT productos_categorias.nombre AS labels, SUM(precios.precio_base) AS data
+                    FROM tickets
+                    INNER JOIN precios ON tickets.precio_id = precios.id
+                    INNER JOIN productos ON precios.producto_id = productos.id
+                    INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
+                    GROUP BY productos_categorias.nombre ORDER BY SUM(precios.precio_base) DESC";
+    
+                    break;
+            }
+        
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+    
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        }
         
         
     }
-
-    
 
 ?>

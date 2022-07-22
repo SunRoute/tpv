@@ -50,6 +50,10 @@
 		public function ventaFakeCerrada($table_id, $venta_id, $timestamp){
 			return $this->ticket->ventaFakeCerrada($table_id, $venta_id, $timestamp);
 		}
+
+		public function getChartData($chart_data){
+			return $this->ticket->getChartData($chart_data);
+		}
 	}
 
 ?>

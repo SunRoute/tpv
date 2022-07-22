@@ -72,5 +72,9 @@
 		}
 
 
+		public function getChartData($chart_data){
+			return $this->venta->getChartData($chart_data);
+		}
+
     }
 ?>

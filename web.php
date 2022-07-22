@@ -353,7 +353,37 @@
 
                 echo json_encode($response);
 
-                break;           
+                break;
+            
+                case 'getSaleChartData':
+                
+                    $sale = new VentaController();
+                    $data = $sale->getChartData($json->chart_data);
+                    
+                    foreach($data as $value){
+                        $response['labels'][] = isset($value['labels']) ? $value['labels'] : null;
+                        $response['data'][] = isset($value['data']) ? $value['data'] : null;
+                        $response['quantity'][] = isset($value['quantity']) ? $value['quantity'] : null;
+                    }
+    
+                    echo json_encode($response);
+                    
+                    break;
+    
+                case 'getTicketChartData':
+    
+                    $ticket = new TicketController();
+                    $data = $ticket->getChartData($json->chart_data);
+                    
+                    foreach($data as $value){
+                        $response['labels'][] = isset($value['labels']) ? $value['labels'] : null;
+                        $response['data'][] = isset($value['data']) ? $value['data'] : null;
+                        $response['quantity'][] = isset($value['quantity']) ? $value['quantity'] : null;
+                    }
+    
+                    echo json_encode($response);
+                    
+                    break;
                     
         }
 
