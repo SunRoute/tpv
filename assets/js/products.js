@@ -5,6 +5,7 @@ export let renderProducts = () => {
     let addProductLayout = document.querySelector(".add-product-layout");
     let ticketContainer = document.querySelector(".ticket-container");
     let totals = document.querySelector(".totals");
+    let exportProductToExcel = document.querySelector(".export-product-to-excel");
 
     // Se crea un bucle porque se trata de diferentes botones
     addProducts.forEach(addProduct => {
@@ -68,6 +69,41 @@ export let renderProducts = () => {
             sendPostRequest();
         }); 
     });
+
+    if(exportProductToExcel) {
+
+        exportProductToExcel.addEventListener("click", (event) => {
+                
+            let sendPostRequest = async () => {
+                
+                let data = {};
+                data["route"] = 'exportProductToExcel'; 
+
+                let response = await fetch('web.php', {
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                
+                    if (!response.ok) throw response;
+
+                    return response.json();
+                })
+                .then(json => {
+
+                   
+                })
+                .catch ( error =>  {
+                    console.log(error);
+                });
+            };
+
+            sendPostRequest();
+        }); 
+    } 
         
 
 };

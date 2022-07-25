@@ -26,7 +26,8 @@
         public function detalle($venta){
 
             $query = "SELECT
-            ventas.numero_ticket AS ticket, ventas.mesa_id AS mesa, metodos_pagos.nombre AS forma_pago, ventas.precio_total_base AS base, ventas.precio_total_iva AS iva, ventas.precio_total AS total
+            ventas.id AS id,
+            ventas.numero_ticket AS ticket, ventas.fecha_emision, ventas.hora_emision, ventas.mesa_id AS mesa, metodos_pagos.nombre AS forma_pago, ventas.precio_total_base AS base, ventas.precio_total_iva AS iva, ventas.precio_total AS total
             FROM ventas
             INNER JOIN metodos_pagos ON ventas.metodo_pago_id = metodos_pagos.id
             WHERE ventas.id = $venta AND ventas.activo = 1";

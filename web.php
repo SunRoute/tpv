@@ -355,35 +355,61 @@
 
                 break;
             
-                case 'getSaleChartData':
+            case 'getSaleChartData':
+            
+                $sale = new VentaController();
+                $data = $sale->getChartData($json->chart_data);
                 
-                    $sale = new VentaController();
-                    $data = $sale->getChartData($json->chart_data);
-                    
-                    foreach($data as $value){
-                        $response['labels'][] = isset($value['labels']) ? $value['labels'] : null;
-                        $response['data'][] = isset($value['data']) ? $value['data'] : null;
-                        $response['quantity'][] = isset($value['quantity']) ? $value['quantity'] : null;
-                    }
-    
-                    echo json_encode($response);
-                    
-                    break;
-    
-                case 'getTicketChartData':
-    
-                    $ticket = new TicketController();
-                    $data = $ticket->getChartData($json->chart_data);
-                    
-                    foreach($data as $value){
-                        $response['labels'][] = isset($value['labels']) ? $value['labels'] : null;
-                        $response['data'][] = isset($value['data']) ? $value['data'] : null;
-                        $response['quantity'][] = isset($value['quantity']) ? $value['quantity'] : null;
-                    }
-    
-                    echo json_encode($response);
-                    
-                    break;
+                foreach($data as $value){
+                    $response['labels'][] = isset($value['labels']) ? $value['labels'] : null;
+                    $response['data'][] = isset($value['data']) ? $value['data'] : null;
+                    $response['quantity'][] = isset($value['quantity']) ? $value['quantity'] : null;
+                }
+
+                echo json_encode($response);
+                
+                break;
+
+            case 'getTicketChartData':
+
+                $ticket = new TicketController();
+                $data = $ticket->getChartData($json->chart_data);
+                
+                foreach($data as $value){
+                    $response['labels'][] = isset($value['labels']) ? $value['labels'] : null;
+                    $response['data'][] = isset($value['data']) ? $value['data'] : null;
+                    $response['quantity'][] = isset($value['quantity']) ? $value['quantity'] : null;
+                }
+
+                echo json_encode($response);
+                
+                break;
+            
+            case 'exportSaleToExcel':
+
+                $venta = new VentaController();
+                $excel = $venta->exportSaleToExcel($json->venta_id);
+                
+                $response = array(
+                    'status' => 'ok',   
+                );
+
+                echo json_encode($response);
+                
+                break;
+            
+            case 'exportProductToExcel':
+
+                $product = new ProductController();
+                $excel = $product->exportProductToExcel();
+                
+                $response = array(
+                    'status' => 'ok',   
+                );
+
+                echo json_encode($response);
+                
+                break;
                     
         }
 
