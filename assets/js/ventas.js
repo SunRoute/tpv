@@ -4,6 +4,7 @@ export let renderVentas = () => {
     let ticketContainer = document.querySelector(".ticket-container");
     let totals = document.querySelector(".totals");
     let exportSaleToExcel = document.querySelector(".export-sale-to-excel");
+    let exportSaleToPdf = document.querySelector(".export-sale-to-pdf");
 
     cobrar.forEach(cobrar => {
             
@@ -66,6 +67,42 @@ export let renderVentas = () => {
                 let data = {};
                 data["route"] = 'exportSaleToExcel';
                 data["venta_id"] = exportSaleToExcel.dataset.sale; 
+
+                let response = await fetch('web.php', {
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                
+                    if (!response.ok) throw response;
+
+                    return response.json();
+                })
+                .then(json => {
+
+                   
+                })
+                .catch ( error =>  {
+                    console.log(error);
+                });
+            };
+
+            sendPostRequest();
+        }); 
+    }
+
+    if(exportSaleToPdf) {
+
+        exportSaleToPdf.addEventListener("click", (event) => {
+                
+            let sendPostRequest = async () => {
+                
+                let data = {};
+                data["route"] = 'exportSaleToPdf';
+                data["sale_id"] = exportSaleToExcel.dataset.sale;
 
                 let response = await fetch('web.php', {
                     headers: {

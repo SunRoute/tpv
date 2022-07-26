@@ -12,10 +12,11 @@
 	    public function index(){
 
             $query = "SELECT
-            ventas.id AS id, ventas.numero_ticket AS ticket, ventas.hora_emision AS hora, mesas.numero AS mesa, ventas.precio_total AS total
+            ventas.id AS id, ventas.numero_ticket AS ticket, ventas.hora_emision AS hora, mesas.numero AS mesa, ventas.precio_total AS total, metodos_pagos.nombre AS pago
             FROM ventas
             INNER JOIN mesas ON ventas.mesa_id = mesas.id
-            WHERE activo = 1";
+            INNER JOIN metodos_pagos ON ventas.metodo_pago_id = metodos_pagos.id
+            WHERE ventas.activo = 1";
 
             $stmt = $this->pdo->prepare($query);
             $result = $stmt->execute();

@@ -47,7 +47,7 @@
 	
 			$productos = $this->product->index();
 			
-			$excel_service->exportProductToExcel($productos);
+			$excel_service->exportTableToExcel('productos', $productos);
 		}
 
 

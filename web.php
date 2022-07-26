@@ -114,16 +114,16 @@
     
                 break;
 
-            case 'storeTable':
+            case 'storeVenta':
 
-                $table = new TableController();
+                $venta = new VentaController();
 
-                $new_table = $table->store($json->id, $json->numero, $json->ubicacion, $json->pax);
+                $new_venta = $venta->store($json->id, $json->ticket, $json->total, $json->pago, $json->mesa);
 
                 $response = array(
                     'status' => 'ok',
                     'id' => $json->id,
-                    'newElement' => $new_table
+                    'newElement' => $new_venta
                 );
 
                 echo json_encode($response);
@@ -157,6 +157,20 @@
                 echo json_encode($response);
 
                 break;
+            
+            // case 'showVenta':
+
+            //     $venta = new VentaController();
+            //     $venta= $venta->show($json->id);
+
+            //     $response = array(
+            //         'status' => 'ok',
+            //         'element' => $venta,
+            //     );
+
+            //     echo json_encode($response);
+
+            //     break;
 
             case 'storePaymentMethod':
 
@@ -354,7 +368,37 @@
                 echo json_encode($response);
 
                 break;
-            
+
+            case 'showVenta':
+
+                $venta = new VentaController();
+    
+                $sale = $venta->detalle($json->id);
+                $products = $venta->pedido($json->id);
+    
+                $html = "";
+    
+                foreach($products as $product){
+    
+                    $html .= '<tr>
+                        <td class="text-center"><img class="img-ticket" src="'.$product['imagen'].'"></td>
+                        <td class="text-center">'.$product['producto'].'</td>
+                        <td class="text-center">'.$product['base'] .'</td>
+                        <td class="text-center">'.$product['cantidad'] .'</td>
+                    </tr>';
+                }
+    
+                $sale['products'] = $html;
+    
+                $response = array(
+                    'status' => 'ok',
+                    'element' => $sale,
+                );
+    
+                echo json_encode($response);            
+    
+                break;
+        
             case 'getSaleChartData':
             
                 $sale = new VentaController();
@@ -402,6 +446,32 @@
 
                 $product = new ProductController();
                 $excel = $product->exportProductToExcel();
+                
+                $response = array(
+                    'status' => 'ok',   
+                );
+
+                echo json_encode($response);
+                
+                break;
+            
+            case 'exportSalesToExcel':
+
+                $venta = new VentaController();
+                $excel = $venta->exportSalesToExcel();
+                
+                $response = array(
+                    'status' => 'ok',   
+                );
+
+                echo json_encode($response);
+                
+                break;
+            
+            case 'exportSaleToPdf':
+
+                $venta = new VentaController();
+                $venta->exportSaleToPdf($json->venta_id);
                 
                 $response = array(
                     'status' => 'ok',   

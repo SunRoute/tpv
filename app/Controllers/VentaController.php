@@ -2,11 +2,14 @@
 
 	namespace app\Controllers;
 
-	require_once 'app/Services/ExcelService.php';
 	require_once 'app/Models/Venta.php';
+	require_once 'app/Services/ExcelService.php';
+	require_once 'app/Services/PdfService.php';
 
 	use app\Models\Venta;
 	use app\Services\ExcelService;
+	use app\Services\PdfService;
+
 
 	class VentaController {
 
@@ -87,6 +90,62 @@
 			
 			$excel_service->exportSaleToExcel($venta, $productos);
 		}
+
+		public function exportSalesToExcel(){
+
+			$excel_service = new ExcelService();
+	
+			$ventas = $this->venta->index();
+			
+			$excel_service->exportTableToExcel('ventas', $ventas);
+		}
+
+		public function exportSaleToPdf($venta_id){
+
+			$ventas = $this->venta->detalle($sale_id);
+			$productos = $this->venta->pedido($venta_id);
+	
+			$html =
+				'<html>
+					<body>'.
+					'<h1>Ticket de venta</h1>'.
+					'<p>Numero de ticket: '.$ventas['ticket'].'</p>'.
+					'<p>Fecha: '.$ventas['fecha_emision'].'</p>'.
+					'<p>Mesa: '.$ventas['mesa'].'</p>'.
+	
+			$html .= 
+				'<table>
+					<tr>
+						<th>Cant</th>
+						<th>Descripción</th>
+						<th>Total</th>
+					</tr>';
+	
+			foreach($productos as $producto){
+				$html .=
+				'<tr>
+				  <td>'.$producto['cantidad'].'</td>
+				  <td>'.$producto['producto'].'</td>
+				  <td>'.$producto['base'].'</td>
+				</tr>';
+			}
+	
+			$html .=
+				'</table>'.
+				'<p>Base: '.$ventas['base'].'</p>'.
+				'<p>IVA: '.$ventas['iva'].'</p>'.
+				'<p>Total: '.$ventas['total'].'</p>'.
+				'<p>Forma de pago: '.$ventas['forma_pago'].'</p>';
+				'</body></html>';
+			
+			$pdf_service = new PdfService();
+			$pdf = $pdf_service->exportToPdf($html);
+	
+			file_put_contents($_SERVER["DOCUMENT_ROOT"] . '/pdf/tickets/ticket-'.$ventas['numero_ticket'].'.pdf', $pdf);
+		}
+
+		
+
 
     }
 ?>

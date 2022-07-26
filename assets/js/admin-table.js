@@ -3,6 +3,7 @@ export let renderAdminTable = () => {
     let deleteTableButtons = document.querySelectorAll('.delete-table-button');
     let deleteTableModal = document.querySelector('.delete-table-modal');
     let editButtons = document.querySelectorAll('.edit-table-button');
+    let exportTableToExcel = document.querySelector(".export-table-to-excel");
 
     document.addEventListener("renderAdminTable",( event =>{
         renderAdminTable();
@@ -84,6 +85,9 @@ export let renderAdminTable = () => {
                         if(document.getElementsByName(key).length > 0 && document.getElementsByName(key)[0].type != "file") {
                             document.getElementsByName(key)[0].value = value;
                         }
+                        else if (document.getElementById(key)){
+                            document.getElementById(key).innerHTML = value;
+                        }
                     });
                 })
                 .catch ( error =>  {
@@ -95,4 +99,40 @@ export let renderAdminTable = () => {
             
         }); 
     });
+
+    if(exportTableToExcel) {
+
+        exportTableToExcel.addEventListener("click", (event) => {
+                
+            let sendPostRequest = async () => {
+                
+                let data = {};
+                data["route"] = exportTableToExcel.dataset.route; 
+
+                let response = await fetch('web.php', {
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    method: 'POST',
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                
+                    if (!response.ok) throw response;
+
+                    return response.json();
+                })
+                .then(json => {
+
+                   
+                })
+                .catch ( error =>  {
+                    console.log(error);
+                });
+            };
+
+            sendPostRequest();
+        }); 
+    } 
+        
 };

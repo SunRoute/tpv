@@ -38,25 +38,33 @@ class ExcelService {
         return $excel_file;
 	}
 
-    public function exportProductToExcel($productos)
+    public function exportTableToExcel($table, $elements)
     {
 
-        $spreedsheet = IOFactory::load($_SERVER["DOCUMENT_ROOT"] .'/excel/templates/listado-productos.xls');
+        $spreedsheet = IOFactory::load($_SERVER["DOCUMENT_ROOT"] .'/excel/templates/table.xls');
         $spreedsheet->setActiveSheetIndex(0);
 
-        for($i = 0; $i < count($productos); $i++){
-            $spreedsheet->getActiveSheet()->insertNewRowBefore(2 + $i, 1); 
-            $spreedsheet->getActiveSheet()->setCellValue('A' . ($i + 2), $productos[$i]['nombre']);
-            $spreedsheet->getActiveSheet()->setCellValue('B' . ($i + 2), $productos[$i]['categoria']);
-            $spreedsheet->getActiveSheet()->setCellValue('C' . ($i + 2), $productos[$i]['iva']);
-            $spreedsheet->getActiveSheet()->setCellValue('D' . ($i + 2), $productos[$i]['base']);
+        $letter = 'A';
+
+        foreach($elements[0] as $key => $value){
+            $spreedsheet->getActiveSheet()->setCellValue(strtoupper($letter) . '1', $key);
+            ++$letter;
+        }
+
+        for($i = 0; $i < count($elements); $i++){
+           
+            $spreedsheet->getActiveSheet()->insertNewRowBefore(2 + $i, 1);
+            $letter = 'A';
+
+            foreach ($elements[$i] as $key => $value) {
+                $spreedsheet->getActiveSheet()->setCellValue($letter . ($i + 2), $elements[$i][$key]);
+                ++$letter;
+            }
         }
 
         $writer = new Xlsx($spreedsheet);        
-        $excel_file = $writer->save($_SERVER["DOCUMENT_ROOT"] . '/excel/productos/productos.xls');
-
-        return $excel_file;
-	}
+        $excel_file = $writer->save($_SERVER["DOCUMENT_ROOT"] . '/excel/tables/table-'.$table.'.xls');
+    }
 
     public function exportExcelToPdf($excel_file, $filename)
     {

@@ -208,3 +208,20 @@ body {
 .excel_button:hover svg path{
   fill: rgb(3, 132, 5);
 }
+
+.pdf-icon{
+  margin: 0 .5rem;
+  width: max-content;
+}
+
+.pdf-icon:hover{
+  cursor: pointer;
+}
+
+.pdf-icon svg {
+  width: 2rem;
+}
+
+.pdf-icon:hover svg path{
+  fill: rgb(210, 13, 13);
+}
