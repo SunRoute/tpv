@@ -192,9 +192,14 @@ body {
 .table tr td img{
   width: 5rem;
 }
+
+.sale-icons{
+  display: flex;
+  justify-content: flex-end;
+}
+
 .excel_button{
   width: max-content;
-  margin-left: auto;
 }
 
 .excel_button:hover{

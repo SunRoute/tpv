@@ -102,21 +102,31 @@
 
 		public function exportSaleToPdf($venta_id){
 
-			$ventas = $this->venta->detalle($sale_id);
+			$ventas = $this->venta->detalle($venta_id);
 			$productos = $this->venta->pedido($venta_id);
 	
 			$html =
 				'<html>
+					<head>
+					<style>
+						body {
+							margin: 0 auto;
+							text-align: center;
+							font-family: verdana;
+							background-color: lightbue;
+						}
+					</style>
+					</head
 					<body>'.
 					'<h1>Ticket de venta</h1>'.
-					'<p>Numero de ticket: '.$ventas['ticket'].'</p>'.
-					'<p>Fecha: '.$ventas['fecha_emision'].'</p>'.
+					'<p>Número de ticket: '.$ventas['ticket'].'</p>'.
+					'<p>Fecha: '.$ventas['ventas.fecha_emision'].'</p>'.
 					'<p>Mesa: '.$ventas['mesa'].'</p>'.
 	
 			$html .= 
 				'<table>
 					<tr>
-						<th>Cant</th>
+						<th>Cantidad</th>
 						<th>Descripción</th>
 						<th>Total</th>
 					</tr>';
@@ -141,11 +151,8 @@
 			$pdf_service = new PdfService();
 			$pdf = $pdf_service->exportToPdf($html);
 	
-			file_put_contents($_SERVER["DOCUMENT_ROOT"] . '/pdf/tickets/ticket-'.$ventas['numero_ticket'].'.pdf', $pdf);
+			file_put_contents($_SERVER["DOCUMENT_ROOT"] . '/pdf/tickets/ticket-'.$ventas['ticket'].'.pdf', $pdf);
 		}
-
-		
-
 
     }
 ?>

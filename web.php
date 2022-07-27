@@ -8,6 +8,7 @@
     require_once 'app/Controllers/ProductCategoryController.php';
     require_once 'app/Controllers/ProductController.php';
     require_once 'app/Controllers/PrecioController.php';
+    require_once 'app/Controllers/EmpresaController.php';
 
   
     use app\Controllers\TicketController;
@@ -18,6 +19,7 @@
     use app\Controllers\ProductCategoryController;
     use app\Controllers\ProductController;
     use app\Controllers\PrecioController;
+    use app\Controllers\EmpresaController;
 
     header("Content-Type: application/json");
 
@@ -114,16 +116,44 @@
     
                 break;
 
-            case 'storeVenta':
+            case 'storeEmpresa':
 
-                $venta = new VentaController();
+                $empresa = new EmpresaController();
 
-                $new_venta = $venta->store($json->id, $json->ticket, $json->total, $json->pago, $json->mesa);
+                $new_empresa = $empresa->store($json->id, $json->razon_social, $json->nombre_comercial, $json->cif, $json->domicilio, $json->telefono, $json->correo_electronico, $json->web);
 
                 $response = array(
                     'status' => 'ok',
                     'id' => $json->id,
-                    'newElement' => $new_venta
+                    'newElement' => $new_empresa
+                );
+
+                echo json_encode($response);
+
+                break;
+            
+            case 'showEmpresa':
+
+                $empresa = new EmpresaController();
+                $empresa = $empresa->show($json->id);
+
+                $response = array(
+                    'status' => 'ok',
+                    'element' => $empresa,
+                );
+
+                echo json_encode($response);
+
+                break;
+            
+            case 'deleteEmpresa':
+
+                $empresa = new EmpresaController();
+                $empresa->delete($json->id);
+
+                $response = array(
+                    'status' => 'ok',
+                    'id' => $json->id
                 );
 
                 echo json_encode($response);
@@ -158,20 +188,6 @@
 
                 break;
             
-            // case 'showVenta':
-
-            //     $venta = new VentaController();
-            //     $venta= $venta->show($json->id);
-
-            //     $response = array(
-            //         'status' => 'ok',
-            //         'element' => $venta,
-            //     );
-
-            //     echo json_encode($response);
-
-            //     break;
-
             case 'storePaymentMethod':
 
                 $pago = new PaymentMethodController();
@@ -363,6 +379,22 @@
                 $response = array(
                     'status' => 'ok',
                     'id' => $json->id
+                );
+
+                echo json_encode($response);
+
+                break;
+
+            case 'storeVenta':
+
+                $venta = new VentaController();
+
+                $new_venta = $venta->store($json->id, $json->ticket, $json->total, $json->pago, $json->mesa);
+
+                $response = array(
+                    'status' => 'ok',
+                    'id' => $json->id,
+                    'newElement' => $new_venta
                 );
 
                 echo json_encode($response);

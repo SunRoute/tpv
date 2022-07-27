@@ -102,7 +102,7 @@ export let renderVentas = () => {
                 
                 let data = {};
                 data["route"] = 'exportSaleToPdf';
-                data["sale_id"] = exportSaleToExcel.dataset.sale;
+                data["venta_id"] = exportSaleToExcel.dataset.sale;
 
                 let response = await fetch('web.php', {
                     headers: {
