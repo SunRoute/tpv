@@ -19,8 +19,8 @@
 			return $this->empresa->index();
 		}
 
-        public function store($json){
-			return $this->empresa->store($json);
+        public function store($id, $razon_social, $nombre_comercial, $cif, $domicilio, $telefono, $correo_electronico, $web){
+			return $this->empresa->store($id, $razon_social, $nombre_comercial, $cif, $domicilio, $telefono, $correo_electronico, $web);
 		}
 
 		public function show($empresa){

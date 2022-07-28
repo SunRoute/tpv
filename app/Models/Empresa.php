@@ -20,11 +20,11 @@
 
         }
 
-        public function store($json){
+        public function store($id, $razon_social, $nombre_comercial, $cif, $domicilio, $telefono, $correo_electronico, $web){
             
-            if(empty($json->id)){
-                $query = "INSERT INTO empresas (razon_social, nombre_comercial, cif, domicilio, telefono, correo_electronico, web, creado, actualizado)
-                VALUES ('$json->razon_social', '$json->nombre_comercial', '$json->cif', '$json->domicilio', '$json->telefono', '$json->correo_electronico', '$json->web', NOW(), NOW())";
+            if(empty($id)){
+                $query = "INSERT INTO empresas (razon_social, nombre_comercial, cif, domicilio, telefono, correo_electronico, web, activo, creado, actualizado)
+                VALUES ('$razon_social', '$nombre_comercial', '$cif', '$domicilio', '$telefono', '$correo_electronico', '$web', 1, NOW(), NOW())";
                 
                 $stmt = $this->pdo->prepare($query);
                 $result = $stmt->execute();
@@ -32,13 +32,13 @@
                 $query = "SELECT * FROM empresas WHERE id =".$this->pdo->lastInsertId();
 
             }else{
-                $query = "UPDATE empresas SET razon_social = '$json->razon_social', nombre_comercial = '$json->nombre_comercial', cif = '$json->cif', domicilio = '$json->domicilio', telefono = '$json->telefono', correo_electronico = '$json->correo_electronico', web =  '$json->web', actualizado = NOW()
-                WHERE id = $json->id";
+                $query = "UPDATE empresas SET razon_social = '$razon_social', nombre_comercial = '$nombre_comercial', cif = '$cif', domicilio = '$domicilio', telefono = '$telefono', correo_electronico = '$correo_electronico', web =  '$web', actualizado = NOW()
+                WHERE id = $id";
     
                 $stmt = $this->pdo->prepare($query);
                 $result = $stmt->execute();   
 
-                $query = "SELECT * FROM empresas WHERE id =".$json->id;
+                $query = "SELECT * FROM empresas WHERE id =".$id;
             }
 
             $stmt = $this->pdo->prepare($query);
@@ -68,10 +68,6 @@
             $result = $stmt->execute();
 
         }
-
-
-
-
 
     }
 

@@ -44,7 +44,7 @@
 			</a>
 		</div>
 		<div class="col-12 gy-4">
-			<a class="btn btn-light g-4 w-100 py-1 px-2 shadow-sm option-system option-system-menu rounded-0 color-gray" role="button" href="admin-mesas.php?panel=2">
+			<a class="btn btn-light g-4 w-100 py-1 px-2 shadow-sm option-system option-system-menu rounded-0 color-gray" role="button" href="">
 				<h2 class="mb-0"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Administración</h2>
 			</a>
 		</div>
@@ -62,7 +62,18 @@
 							<li><a class="dropdown-item" href="admin-productos.php?panel=2">Productos</a></li>
 							<li><a class="dropdown-item" href="admin-ivas.php?panel=2">Tipos de IVA</a></li>
 							<li><a class="dropdown-item" href="admin-pagos.php?panel=2">Métodos de pago</a></li>
-							<li><a class="dropdown-item" href="#">Ubicaciones</a></li>
+							<li><a class="dropdown-item" href="admin-ventas.php?panel=2">Ventas</a></li>
+							<li><a class="dropdown-item" href="#">Ubicaciones</a></li>	
+						</ul>
+					</li>
+					<li class="nav-item dropdown mt-2">
+						<a class="nav-link dropdown-toggle" href="graficos.php?panel=2" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						ADMINISTRACIÓN DE EMPRESAS
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+							<li><a class="dropdown-item" href="admin-empresas.php?panel=2">Empresas</a></li>
+							<li><a class="dropdown-item" href="admin-sucursales.php?panel=2">Sucursales</a></li>
+							<li><a class="dropdown-item" href="admin-trabajadores.php?panel=2">Trabajadores</a></li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown mt-2">

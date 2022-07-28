@@ -9,6 +9,8 @@
     require_once 'app/Controllers/ProductController.php';
     require_once 'app/Controllers/PrecioController.php';
     require_once 'app/Controllers/EmpresaController.php';
+    require_once 'app/Controllers/SucursalController.php';
+    require_once 'app/Controllers/TrabajadorController.php';
 
   
     use app\Controllers\TicketController;
@@ -20,6 +22,8 @@
     use app\Controllers\ProductController;
     use app\Controllers\PrecioController;
     use app\Controllers\EmpresaController;
+    use app\Controllers\SucursalController;
+    use app\Controllers\TrabajadorController;
 
     header("Content-Type: application/json");
 
@@ -154,6 +158,110 @@
                 $response = array(
                     'status' => 'ok',
                     'id' => $json->id
+                );
+
+                echo json_encode($response);
+
+                break;
+
+            case 'storeSucursal':
+
+                $sucursal = new SucursalController();
+
+                $new_sucursal = $sucursal->store($json->id, $json->nombre_comercial, $json->domicilio, $json->codigo_postal, $json->telefono, $json->correo_electronico, $json->web);
+
+                $response = array(
+                    'status' => 'ok',
+                    'id' => $json->id,
+                    'newElement' => $new_sucursal
+                );
+
+                echo json_encode($response);
+
+                break;
+            
+            case 'showSucursal':
+
+                $sucursal = new SucursalController();
+                $sucursal = $sucursal->show($json->id);
+
+                $response = array(
+                    'status' => 'ok',
+                    'element' => $sucursal,
+                );
+
+                echo json_encode($response);
+
+                break;
+            
+            case 'deleteSucursal':
+
+                $sucursal = new SucursalController();
+                $sucursal->delete($json->id);
+
+                $response = array(
+                    'status' => 'ok',
+                    'id' => $json->id
+                );
+
+                echo json_encode($response);
+
+                break;
+
+                case 'storeTrabajador':
+
+                    $trabajador = new TrabajadorController();
+    
+                    $new_trabajador = $trabajador->store($json->id, $json->nombre, $json->apellidos, $json->correo, $json->sucursal_id, $json->situacion);
+    
+                    $response = array(
+                        'status' => 'ok',
+                        'id' => $json->id,
+                        'newElement' => $new_trabajador
+                    );
+    
+                    echo json_encode($response);
+    
+                    break;
+                
+                case 'showTrabajador':
+    
+                    $trabajador = new TrabajadorController();
+                    $trabajador = $trabajador->show($json->id);
+    
+                    $response = array(
+                        'status' => 'ok',
+                        'element' => $trabajador,
+                    );
+    
+                    echo json_encode($response);
+    
+                    break;
+                
+                case 'deleteTrabajador':
+    
+                    $trabajador = new TrabajadorController();
+                    $trabajador->delete($json->id);
+    
+                    $response = array(
+                        'status' => 'ok',
+                        'id' => $json->id
+                    );
+    
+                    echo json_encode($response);
+    
+                    break;    
+            
+            case 'storeTable':
+
+                $table = new TableController();
+
+                $new_table = $table->store($json->id, $json->numero, $json->ubicacion, $json->pax);
+
+                $response = array(
+                    'status' => 'ok',
+                    'id' => $json->id,
+                    'newElement' => $new_table
                 );
 
                 echo json_encode($response);
@@ -379,22 +487,6 @@
                 $response = array(
                     'status' => 'ok',
                     'id' => $json->id
-                );
-
-                echo json_encode($response);
-
-                break;
-
-            case 'storeVenta':
-
-                $venta = new VentaController();
-
-                $new_venta = $venta->store($json->id, $json->ticket, $json->total, $json->pago, $json->mesa);
-
-                $response = array(
-                    'status' => 'ok',
-                    'id' => $json->id,
-                    'newElement' => $new_venta
                 );
 
                 echo json_encode($response);

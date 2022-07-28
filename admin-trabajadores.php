@@ -1,10 +1,15 @@
 <?php
 
-	require_once 'app/Controllers/SucursalController.php';
+	require_once 'app/Controllers/TrabajadorController.php';
+    require_once 'app/Controllers/SucursalController.php';
 
-	use app\Controllers\SucursalController;
+	use app\Controllers\TrabajadorController;
+    use app\Controllers\SucursalController;
 
-	$sucursal = new SucursalController();
+	$trabajador = new TrabajadorController();
+    $sucursal = new SucursalController();
+
+	$trabajadores = $trabajador->index();
 	$sucursales = $sucursal->index();
 
 ?>
@@ -31,13 +36,13 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center mt-3 border titular"><small class="small-admin">PANEL DE ADMINISTRACIÓN</small>SUCURSALES</h1>
+                <h1 class="text-center mt-3 border titular"><small class="small-admin">PANEL DE ADMINISTRACIÓN</small>TRABAJADORES</h1>
             </div>
             <div class="col-12 mt-5">
                 <section>
                     <div class="row">
                         <div class="col d-flex justify-content-end">
-                            <button type="button" class="create-form-button btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addArticle">+ Añadir sucursal</button>
+                            <button type="button" class="create-form-button btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addArticle">+ Añadir trabajador</button>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -45,42 +50,38 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                    <th scope="col">Nombre comercial</th>
-                                    <th scope="col">Domicilio</th>
-                                    <th scope="col">Código postal</th>
-                                    <th scope="col">Teléfono</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellidos</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Web</th>
+                                    <th scope="col">Sucursal</th>
+                                    <th scope="col">Situación actual</th>
                                     <th scope="col">Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach($sucursales as $sucursal): ?>
-                                        <tr class="table-element" data-element="<?= $sucursal['id'] ?>">
-                                            <th scope="row" class="nombre_comercial">
-                                                <?= $sucursal['nombre_comercial'] ?>
+                                    <?php foreach($trabajadores as $trabajador): ?>
+                                        <tr class="table-element" data-element="<?= $trabajador['id'] ?>">
+                                            <th scope="row" class="nombre">
+                                                <?= $trabajador['nombre'] ?>
                                             </th>
-                                            <td class="domicilio">
-                                                <?= $sucursal['domicilio'] ?>
+                                            <td class="apellidos">
+                                                <?= $trabajador['apellidos'] ?>
                                             </td>
-                                            <td class="codigo_postal">
-                                                <?= $sucursal['codigo_postal'] ?>
+                                            <td class="correo">
+                                                <?= $trabajador['correo'] ?>
                                             </td>
-                                            <td class="telefono">
-                                                <?= $sucursal['telefono'] ?>
+                                            <td class="sucursal">
+                                                <?= $trabajador['sucursal'] ?>
                                             </td>
-                                            <td class="correo_electronico">
-                                                <?= $sucursal['correo_electronico'] ?>
-                                            </td>
-                                            <td class="web">
-                                                <?= $sucursal['web'] ?>
+                                            <td class="situacion">
+                                                <?= $trabajador['situacion'] ?>
                                             </td>
                                             <!-- Ruta para mostrar y modificar un registro -->
                                             <td class="opciones">
-                                                <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="<?= $sucursal['id'] ?>" data-route="showSucursal" data-bs-target="#addArticle">
+                                                <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="<?= $trabajador['id'] ?>" data-route="showTrabajador" data-bs-target="#addArticle">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" class="delete-table-button btn btn-danger" data-id="<?= $sucursal['id'] ?>" data-bs-toggle="modal" data-bs-target="#deleteArticle">
+                                                <button type="button" class="delete-table-button btn btn-danger" data-id="<?= $trabajador['id'] ?>" data-bs-toggle="modal" data-bs-target="#deleteArticle">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </td>
@@ -88,14 +89,13 @@
                                     <?php endforeach; ?>
                                     <!-- Este dato es invisible mediante d-none. Cada cajita tiene la misma clase que los inputs de la tabla. Clona en admin-form... Mientras exista la plantilla que tenga las mismas clases, se aplicarán los datos-->
                                     <tr class="create-layout table-element d-none" data-element="">
-                                        <th scope="row" class="nombre_comercial"></th>
-                                        <td class="domicilio"></td>
-                                        <td class="codigo_postal"></td>
-                                        <td class="telefono"></td>
-                                        <td class="correo_electronico"></td>
-                                        <td class="web"></td>
+                                        <th scope="row" class="nombre"></th>
+                                        <td class="apellidos"></td>
+                                        <td class="correo"></td>
+                                        <td class="sucursal"></td>
+                                        <td class="situacion"></td>
                                         <td class="opciones">
-                                            <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="" data-route="showSucursal" data-bs-target="#addArticle">
+                                            <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="" data-route="showTrabajador" data-bs-target="#addArticle">
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                             <button type="button" class="delete-table-button btn btn-danger" data-id="" data-bs-toggle="modal" data-bs-target="#deleteArticle">
@@ -139,36 +139,46 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addArticleLabel">ADMINISTRAR SUCURSAL</h5>
+                    <h5 class="modal-title" id="addArticleLabel">ADMINISTRAR TRABAJADOR</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <!-- Ruta para crear registro nuevo. Se dirige a su caso de web.php -->
-                    <form class="admin-form" data-route="storeSucursal">
+                    <form class="admin-form" data-route="storeTrabajador">
                         <input type="hidden" name="id" value="">
                         <div class="mb-3">
-                            <label for="nombre_comercial" class="form-label">Nombre comercial</label>
-                            <input type="text" class="form-control" name="nombre_comercial" value="">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" value="">
                         </div>
                         <div class="mb-3">
-                            <label for="domicilio" class="form-label">Domicilio</label>
-                            <input type="text" class="form-control" name="domicilio" value="">
+                            <label for="apellidos" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" name="apellidos" value="">
                         </div>
                         <div class="mb-3">
-                            <label for="codigo_postal" class="form-label">CIF</label>
-                            <input type="text" class="form-control" name="codigo_postal" value="">
+                            <label for="correo" class="form-label">Email</label>
+                            <input type="text" class="form-control" name="correo" value="">
+                        </div>
+                        <!-- <div class="mb-3">
+                            <label for="sucursal" class="form-label">Sucursal</label>
+                            <input type="text" class="form-control" name="sucursal" value="">
+                        </div> -->
+                        <div class="mb-3">
+                            <label for="sucursal" class="form-label">Sucursal</label>
+                            <select class="form-select" aria-label="Default select example" name="sucursal">
+                                <option selected>Selecciona sucursal</option>
+                                <?php foreach($sucursales as $sucursal):?>
+                                    <option value="<?= $sucursal['id']; ?>"
+                                    <?= $sucursal['nombre_comercial'] == $sucursal ? 'selected':'' ?>><?= $sucursal['nombre_comercial']; ?></option>
+                                <?php endforeach;?>   
+                            </select>
                         </div>
                         <div class="mb-3">
-                            <label for="telefono" class="form-label">Teléfono</label>
-                            <input type="text" class="form-control" name="telefono" value="">
-                        </div>
-                        <div class="mb-3">
-                            <label for="correo_electronico" class="form-label">Email</label>
-                            <input type="text" class="form-control" name="correo_electronico" value="">
-                        </div>
-                        <div class="mb-3">
-                            <label for="web" class="form-label">Web</label>
-                            <input type="text" class="form-control" name="web" value="">
+                            <label for="situacion" class="form-label">Alta/Baja</label>
+                            <select class="form-select" aria-label="Default select example" name="situacion">
+                                <option selected>Selecciona situación</option>
+                                <option value="1">Alta</option>
+                                <option value="0">Baja</option>
+                            </select>
                         </div>
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-secondary mt-3 me-2" data-bs-dismiss="modal">CERRAR</button>
@@ -186,16 +196,16 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteArticleLabel">ELIMINAR SUCURSAL</h5>
+                    <h5 class="modal-title" id="deleteArticleLabel">BAJA DEFINITIVA TRABAJADOR</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-center text-muted">Está a punto de borrar una empresa. ¿Está completamente seguro de realizar esta acción?</p>
+                    <p class="text-center text-muted">Está a punto de dar de baja un trabajador. ¿Está completamente seguro de realizar esta acción?</p>
                 </div>
                 <!-- Ruta para eliminar un registro -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                    <button type="button" class="delete-table-modal btn btn-primary" data-bs-dismiss="modal" data-route="deleteSucursal">ELIMINAR</button>
+                    <button type="button" class="delete-table-modal btn btn-primary" data-bs-dismiss="modal" data-route="deleteTrabajador">ELIMINAR</button>
                 </div>
             </div>
         </div>

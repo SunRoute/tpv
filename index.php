@@ -43,7 +43,7 @@
                         </a>
                     </div>
                     <div class="col-6 col-md-4 gy-4">
-                        <a class="btn btn-warning g-4 w-100 py-4 py-sm-5 px-2 shadow-sm option-system option-system-menu rounded-0" role="button" href="">
+                        <a class="btn btn-warning g-4 w-100 py-4 py-sm-5 px-2 shadow-sm option-system option-system-menu rounded-0" role="button" href="graficos.php?panel=1">
                         <i class="fa fa-line-chart" aria-hidden="true"></i>
                             <h2>Estadísticas</h2>
                         </a>
