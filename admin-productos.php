@@ -12,7 +12,21 @@
     $categoria = new ProductCategoryController();
     $iva = new IvaController();
 
-	$products = $product->index();
+// Variable = Si no está vacío el dato(condición) ? lo trae(si sí) : null(si no);
+    $category= !empty($_GET['categoria']) ? $_GET['categoria'] : null;
+    $visible= !empty($_GET['visible']) ? $_GET['visible'] : null;
+
+// Enviar la variable como parámetro en la función 'filtroPorCategoria'
+	if($category == null && $visible== null){
+
+        $products = $product->index();
+    
+    }else{
+
+        $products = $product->filtro($category, $visible);
+        
+    }
+    
     $categorias = $categoria->index();
     $ivas = $iva->index();
 	
@@ -51,6 +65,8 @@
                     </div>
                     <div class="row">
                         <div class="col d-flex justify-content-end">
+                            <button type="button" class="filter-form-button btn btn-primary mb-2 me-2" data-bs-toggle="modal" data-bs-target="#filterArticle">Filtrar</button>
+
                             <button type="button" class="create-form-button btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addArticle">+ Añadir producto</button>
                         </div>
                     </div>
@@ -230,6 +246,46 @@
         </div>
     </div>
 
+
+    <div>
+        <div id="filterArticle" class="modal fade" tabindex="-1" aria-labelledby="filterArticleLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterArticleLabel">FILTRAR PRODUCTOS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="admin-productos.php" method="GET">
+
+                        <div class="mb-3">
+                            <label for="categoria" class="form-label">Categoría del producto</label>
+                            <select class="form-select" aria-label="Default select example" name="categoria">
+                                <option value="">Todas</option>
+                                <?php foreach($categorias as $categoria): ?>
+                                    <option value="<?= $categoria['id'] ?>"><?= $categoria['nombre'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="visible" class="form-label">Visible:</label>
+                            <select class="form-select" aria-label="Default select example" name="visible">
+                                <option value="">Todos</option>
+                                <option value="true">Visibles</option>
+                                <option value="false">No visibles</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script type="module" src="dist/main.js"></script>

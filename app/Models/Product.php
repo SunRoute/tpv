@@ -38,6 +38,41 @@ class Product extends Connection {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     }
+
+    public function filtro($category, $visible){
+// En caso de que la variable sea 'null', sacamos todos los productos por la función 'index' (más arriba)
+
+            $query = "SELECT productos.id AS id, productos.nombre AS nombre, productos.imagen_url AS imagen_url, productos.visible AS visible, productos_categorias.nombre AS categoria, precios.precio_base AS base, iva.tipo AS iva, precios.id AS precio_id
+            FROM productos
+            INNER JOIN productos_categorias ON productos.categoria_id = productos_categorias.id
+            INNER JOIN precios ON precios.producto_id = productos.id
+            INNER JOIN iva ON precios.iva_id = iva.id
+            WHERE productos.activo = 1 AND precios.vigente = 1";
+
+// En caso contrario, se sacan los datos añadiendo los siguientes según las condiciones
+            if(!empty($category)){
+
+                $query .=" AND categoria_id = $category";
+
+            }
+            if($visible == 'true'){
+
+                $query .=" AND productos.visible = 1";
+            }
+
+            if($visible == 'false'){
+
+                $query .=" AND productos.visible = 0";
+
+            }
+
+        $stmt = $this->pdo->prepare($query);
+        $result = $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    }
+
     public function categoria($category){
 
         $query = "SELECT

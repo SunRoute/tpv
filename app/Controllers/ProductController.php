@@ -24,6 +24,11 @@
 		public function indexPorCategoria($category){
 			return $this->product->indexPorCategoria($category);
 		}
+
+
+		public function filtro($category, $visible){
+			return $this->product->filtro($category, $visible);
+		}
 		
 		public function categoria($category){
 			return $this->product->categoria($category);

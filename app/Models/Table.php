@@ -94,6 +94,18 @@
 
         }
 
+        public function filtroUbicacion($ubicacion){
+
+            $query = "SELECT * FROM mesas WHERE ubicacion = '$ubicacion'";
+
+            $stmt = $this->pdo->prepare($query);
+            $result = $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        }
+
+
 
 
 

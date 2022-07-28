@@ -5,8 +5,16 @@
 	use app\Controllers\TableController;
 
 	$table = new TableController();
-	$tables = $table->index();
+    
+    if(!empty($_GET['ubicacion'])){
+        
+        $tables = $table->filtroUbicacion($_GET['ubicacion']);
 
+    }
+    else{
+        
+        $tables = $table->index();
+    } 
     
 
 	
@@ -40,6 +48,7 @@
                 <section>
                     <div class="row">
                         <div class="col d-flex justify-content-end">
+                            <button type="button" class="filter-form-button btn btn-primary mb-2 me-2" data-bs-toggle="modal" data-bs-target="#filterArticle">Filtrar</button>
                             <button type="button" class="create-form-button btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addArticle">+ Añadir mesa</button>
                         </div>
                     </div>
@@ -178,7 +187,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteArticleLabel">ELIMINAR MESA Nº 1</h5>
+                    <h5 class="modal-title" id="deleteArticleLabel">ELIMINAR MESA</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -194,6 +203,39 @@
     </div>
 
 
+
+
+
+
+    <div>
+        <div id="filterArticle" class="modal fade" tabindex="-1" aria-labelledby="filterArticleLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterArticleLabel">FILTRAR MESAS</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="admin-mesas.php" method="GET">
+
+                        <div class="mb-3">
+                            <label for="ubicacion" class="form-label">Ubicacion</label>
+                            <select class="form-select" aria-label="Default select example" name="ubicacion">
+                                <option value="">Todas</option>
+                                <option value="local">Local</option>
+                                <option value="terraza">Terraza</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script type="module" src="dist/main.js"></script>
 </body>

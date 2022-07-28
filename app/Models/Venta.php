@@ -58,7 +58,6 @@
 
         public function filtro($fecha,$mesa){
 
-    
             if($mesa == null){
                 $query = "SELECT
                 ventas.id AS id, ventas.numero_ticket AS ticket, ventas.hora_emision AS hora, mesas.numero AS mesa, ventas.precio_total AS total

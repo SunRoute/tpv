@@ -38,6 +38,11 @@
 		public function delete($id){
 			return $this->table->delete($id);
 		}
+
+		public function filtroUbicacion($id){
+			return $this->table->filtroUbicacion($id);
+		}
+
 		
 	}
 
