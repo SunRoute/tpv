@@ -116,7 +116,7 @@
                                 <div class="modal-body">
                                     <p class="text-center text-muted">Está a punto de borrar el pedido sin ser cobrado. ¿Está completamente seguro de realizar esta acción?</p>
                                 </div>
-                                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">CERRAR</button><button data-bs-dismiss="modal" class="delete-all btn btn-success" data-table="<?php echo $_GET['mesa'] ?>" type="button">ELIMINAR</button></div>
+                                <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">CERRAR</button><button data-bs-dismiss="modal" class="delete-all btn btn-success" data-table="<?php echo $_GET['mesa'];?>" type="button">ELIMINAR</button></div>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                                 <?php foreach($forma_pago as $forma_pago):?> 
                                     <div class="modal-body">
                                         <div class="row align-items-center flex-column">
-                                            <div class="col-6 d-lg-flex m-2"><button class="cobrar btn btn-primary w-100" data-bs-dismiss="modal" data-pago="<?= $forma_pago['pago_id']; ?>" data-table="<?php echo $_GET['mesa'] ?>" type="button"><?= $forma_pago['forma_pago']; ?></button></div>
+                                            <div class="col-6 d-lg-flex m-2"><button class="cobrar btn btn-primary w-100" data-bs-dismiss="modal" data-pago="<?= $forma_pago['pago_id']; ?>" data-table="<?php echo $_GET['mesa'];?>" type="button"><?= $forma_pago['forma_pago']; ?></button></div>
                                         </div>
                                     </div>
                                 <?php endforeach;?>
