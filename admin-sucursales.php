@@ -190,7 +190,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="text-center text-muted">Está a punto de borrar una empresa. ¿Está completamente seguro de realizar esta acción?</p>
+                    <p class="text-center text-muted">Está a punto de borrar una sucursal. ¿Está completamente seguro de realizar esta acción?</p>
                 </div>
                 <!-- Ruta para eliminar un registro -->
                 <div class="modal-footer">

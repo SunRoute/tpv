@@ -19,8 +19,8 @@
 			return $this->trabajador->index();
 		}
 
-        public function store($id, $nombre, $apellidos, $correo, $sucursal_id, $situacion){
-			return $this->trabajador->store($id, $nombre, $apellidos, $correo, $sucursal_id, $situacion);
+        public function store($id, $nombre, $apellidos, $correo, $password, $sucursal){
+			return $this->trabajador->store($id, $nombre, $apellidos, $correo, $password, $sucursal);
 		}
 
 		public function show($trabajador){

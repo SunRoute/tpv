@@ -169,7 +169,7 @@
                 $sucursal = new SucursalController();
 
                 $new_sucursal = $sucursal->store($json->id, $json->nombre_comercial, $json->domicilio, $json->codigo_postal, $json->telefono, $json->correo_electronico, $json->web);
-
+                
                 $response = array(
                     'status' => 'ok',
                     'id' => $json->id,
@@ -212,8 +212,8 @@
 
                     $trabajador = new TrabajadorController();
     
-                    $new_trabajador = $trabajador->store($json->id, $json->nombre, $json->apellidos, $json->correo, $json->sucursal_id, $json->situacion);
-    
+                    $new_trabajador = $trabajador->store($json->id, $json->nombre, $json->apellidos, $json->correo,$json->password, $json->sucursal);
+
                     $response = array(
                         'status' => 'ok',
                         'id' => $json->id,

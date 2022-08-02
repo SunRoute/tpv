@@ -1,1 +1,2 @@
-INSERT INTO tickets (precio_id, mesa_id, activo, creado, actualizado) VALUES (6, 2, 1, '2021-10-18 22:54:00', '2021-10-18 22:54:00')
+UPDATE trabajadores SET activo=0, actualizado = NOW()
+            WHERE id = 

@@ -113,7 +113,7 @@
 							margin: 0 auto;
 							text-align: center;
 							font-family: verdana;
-							background-color: lightbue;
+							background-color: lightblue;
 						}
 					</style>
 					</head

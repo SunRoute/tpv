@@ -54,7 +54,6 @@
                                     <th scope="col">Apellidos</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Sucursal</th>
-                                    <th scope="col">Situación actual</th>
                                     <th scope="col">Opciones</th>
                                     </tr>
                                 </thead>
@@ -73,9 +72,6 @@
                                             <td class="sucursal">
                                                 <?= $trabajador['sucursal'] ?>
                                             </td>
-                                            <td class="situacion">
-                                                <?= $trabajador['situacion'] ?>
-                                            </td>
                                             <!-- Ruta para mostrar y modificar un registro -->
                                             <td class="opciones">
                                                 <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="<?= $trabajador['id'] ?>" data-route="showTrabajador" data-bs-target="#addArticle">
@@ -92,8 +88,7 @@
                                         <th scope="row" class="nombre"></th>
                                         <td class="apellidos"></td>
                                         <td class="correo"></td>
-                                        <td class="sucursal"></td>
-                                        <td class="situacion"></td>
+                                        <td class="sucursal"><?= $trabajador['sucursal'] ?></td>
                                         <td class="opciones">
                                             <button type="button" class="edit-table-button btn btn-success" data-bs-toggle="modal" data-id="" data-route="showTrabajador" data-bs-target="#addArticle">
                                                 <i class="fa fa-edit"></i>
@@ -158,10 +153,10 @@
                             <label for="correo" class="form-label">Email</label>
                             <input type="text" class="form-control" name="correo" value="">
                         </div>
-                        <!-- <div class="mb-3">
-                            <label for="sucursal" class="form-label">Sucursal</label>
-                            <input type="text" class="form-control" name="sucursal" value="">
-                        </div> -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" value="">
+                        </div>
                         <div class="mb-3">
                             <label for="sucursal" class="form-label">Sucursal</label>
                             <select class="form-select" aria-label="Default select example" name="sucursal">
@@ -170,14 +165,6 @@
                                     <option value="<?= $sucursal['id']; ?>"
                                     <?= $sucursal['nombre_comercial'] == $sucursal ? 'selected':'' ?>><?= $sucursal['nombre_comercial']; ?></option>
                                 <?php endforeach;?>   
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="situacion" class="form-label">Alta/Baja</label>
-                            <select class="form-select" aria-label="Default select example" name="situacion">
-                                <option selected>Selecciona situación</option>
-                                <option value="1">Alta</option>
-                                <option value="0">Baja</option>
                             </select>
                         </div>
                         <div class="d-flex justify-content-end">
@@ -196,7 +183,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteArticleLabel">BAJA DEFINITIVA TRABAJADOR</h5>
+                    <h5 class="modal-title" id="deleteArticleLabel">BAJA TRABAJADOR</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
